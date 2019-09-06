@@ -7,14 +7,33 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		2ED1F19D23224C5F0054B632 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 6C702FD220D7DA0E000083E1 /* Main.storyboard */; };
+		2ED1F1A2232251660054B632 /* NFCTestFramework.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 2ED1F1A0232251220054B632 /* NFCTestFramework.framework */; };
+		2ED1F1A3232251660054B632 /* NFCTestFramework.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 2ED1F1A0232251220054B632 /* NFCTestFramework.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		6C702FCF20D7DA0E000083E1 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6C702FCE20D7DA0E000083E1 /* AppDelegate.swift */; };
 		6C702FD120D7DA0E000083E1 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6C702FD020D7DA0E000083E1 /* ViewController.swift */; };
-		6C702FD420D7DA0E000083E1 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 6C702FD220D7DA0E000083E1 /* Main.storyboard */; };
 		6C702FD620D7DA0E000083E1 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 6C702FD520D7DA0E000083E1 /* Assets.xcassets */; };
 		6C702FD920D7DA0E000083E1 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 6C702FD720D7DA0E000083E1 /* LaunchScreen.storyboard */; };
 /* End PBXBuildFile section */
 
+/* Begin PBXCopyFilesBuildPhase section */
+		2ED1F1A4232251660054B632 /* Embed Frameworks */ = {
+			isa = PBXCopyFilesBuildPhase;
+			buildActionMask = 2147483647;
+			dstPath = "";
+			dstSubfolderSpec = 10;
+			files = (
+				2ED1F1A3232251660054B632 /* NFCTestFramework.framework in Embed Frameworks */,
+			);
+			name = "Embed Frameworks";
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXCopyFilesBuildPhase section */
+
 /* Begin PBXFileReference section */
+		2ED1F19F23224C600054B632 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/Main.strings; sourceTree = "<group>"; };
+		2ED1F1A0232251220054B632 /* NFCTestFramework.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = NFCTestFramework.framework; sourceTree = "<group>"; };
+		2ED1F1A5232251A00054B632 /* AlertController.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = AlertController.entitlements; sourceTree = "<group>"; };
 		6C702FCB20D7DA0E000083E1 /* AlertController.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = AlertController.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		6C702FCE20D7DA0E000083E1 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		6C702FD020D7DA0E000083E1 /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
@@ -29,6 +48,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				2ED1F1A2232251660054B632 /* NFCTestFramework.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -40,6 +60,7 @@
 			children = (
 				6C702FCD20D7DA0E000083E1 /* AlertController */,
 				6C702FCC20D7DA0E000083E1 /* Products */,
+				2ED1F1A0232251220054B632 /* NFCTestFramework.framework */,
 			);
 			sourceTree = "<group>";
 		};
@@ -54,6 +75,7 @@
 		6C702FCD20D7DA0E000083E1 /* AlertController */ = {
 			isa = PBXGroup;
 			children = (
+				2ED1F1A5232251A00054B632 /* AlertController.entitlements */,
 				6C702FCE20D7DA0E000083E1 /* AppDelegate.swift */,
 				6C702FD020D7DA0E000083E1 /* ViewController.swift */,
 				6C702FD220D7DA0E000083E1 /* Main.storyboard */,
@@ -74,6 +96,7 @@
 				6C702FC720D7DA0E000083E1 /* Sources */,
 				6C702FC820D7DA0E000083E1 /* Frameworks */,
 				6C702FC920D7DA0E000083E1 /* Resources */,
+				2ED1F1A4232251660054B632 /* Embed Frameworks */,
 			);
 			buildRules = (
 			);
@@ -123,9 +146,9 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				2ED1F19D23224C5F0054B632 /* Main.storyboard in Resources */,
 				6C702FD920D7DA0E000083E1 /* LaunchScreen.storyboard in Resources */,
 				6C702FD620D7DA0E000083E1 /* Assets.xcassets in Resources */,
-				6C702FD420D7DA0E000083E1 /* Main.storyboard in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -148,6 +171,7 @@
 			isa = PBXVariantGroup;
 			children = (
 				6C702FD320D7DA0E000083E1 /* Base */,
+				2ED1F19F23224C600054B632 /* en */,
 			);
 			name = Main.storyboard;
 			sourceTree = "<group>";
@@ -274,13 +298,21 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CODE_SIGN_ENTITLEMENTS = AlertController/AlertController.entitlements;
 				CODE_SIGN_STYLE = Automatic;
+				DEVELOPMENT_TEAM = 72RMQ6K75Z;
+				ENABLE_BITCODE = NO;
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(PROJECT_DIR)",
+				);
 				INFOPLIST_FILE = AlertController/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 13.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
-				PRODUCT_BUNDLE_IDENTIFIER = com.velmikistudio.AlertController;
+				PRODUCT_BUNDLE_IDENTIFIER = de.ecsec.AlertController;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 4.0;
-				TARGETED_DEVICE_FAMILY = "1,2";
+				TARGETED_DEVICE_FAMILY = 1;
 			};
 			name = Debug;
 		};
@@ -288,13 +320,21 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CODE_SIGN_ENTITLEMENTS = AlertController/AlertController.entitlements;
 				CODE_SIGN_STYLE = Automatic;
+				DEVELOPMENT_TEAM = 72RMQ6K75Z;
+				ENABLE_BITCODE = NO;
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(PROJECT_DIR)",
+				);
 				INFOPLIST_FILE = AlertController/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 13.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
-				PRODUCT_BUNDLE_IDENTIFIER = com.velmikistudio.AlertController;
+				PRODUCT_BUNDLE_IDENTIFIER = de.ecsec.AlertController;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 4.0;
-				TARGETED_DEVICE_FAMILY = "1,2";
+				TARGETED_DEVICE_FAMILY = 1;
 			};
 			name = Release;
 		};
