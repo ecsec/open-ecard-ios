@@ -1,9 +1,4 @@
 
-/* Class = "UIButton"; normalTitle = "Default AlertController Actionsheet"; ObjectID = "3q9-Ck-riN"; */
-"3q9-Ck-riN.normalTitle" = "Default AlertController Actionsheet";
-
 /* Class = "UIButton"; normalTitle = "Default AlertController With Form"; ObjectID = "EeM-Wr-hRO"; */
-"EeM-Wr-hRO.normalTitle" = "Default AlertController With Form";
+"EeM-Wr-hRO.normalTitle" = "Do things";
 
-/* Class = "UIButton"; normalTitle = "Default AlertController Alert"; ObjectID = "kUq-fj-pj8"; */
-"kUq-fj-pj8.normalTitle" = "Default AlertController Alert";
