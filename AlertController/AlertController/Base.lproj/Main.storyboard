@@ -17,7 +17,7 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="sfY-UI-rPu">
-                                <rect key="frame" x="16" y="20" width="343" height="622"/>
+                                <rect key="frame" x="16" y="20" width="343" height="177"/>
                                 <subviews>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="EeM-Wr-hRO">
                                         <rect key="frame" x="8" y="84" width="327" height="30"/>
@@ -30,12 +30,20 @@
                                             <action selector="defaultHandler:" destination="BYZ-38-t0r" eventType="touchUpInside" id="8yN-73-S54"/>
                                         </connections>
                                     </button>
+                                    <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" fixedFrame="YES" restorationIdentifier="tf" text="txt" textAlignment="natural" translatesAutoresizingMaskIntoConstraints="NO" id="w3n-2s-CMJ" userLabel="tf2">
+                                        <rect key="frame" x="8" y="177" width="327" height="437"/>
+                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                        <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
+                                        <color key="textColor" systemColor="labelColor" cocoaTouchSystemColor="darkTextColor"/>
+                                        <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                        <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
+                                    </textView>
                                 </subviews>
                                 <color key="backgroundColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <constraints>
                                     <constraint firstItem="EeM-Wr-hRO" firstAttribute="leading" secondItem="sfY-UI-rPu" secondAttribute="leading" constant="8" id="Ydf-FW-7kk"/>
                                     <constraint firstAttribute="trailing" secondItem="EeM-Wr-hRO" secondAttribute="trailing" constant="8" id="jVk-M8-Z09"/>
-                                    <constraint firstAttribute="bottom" secondItem="EeM-Wr-hRO" secondAttribute="bottom" constant="508" id="jnQ-wm-dLD"/>
+                                    <constraint firstAttribute="bottom" secondItem="EeM-Wr-hRO" secondAttribute="bottom" constant="63" id="jnQ-wm-dLD"/>
                                 </constraints>
                             </view>
                         </subviews>
@@ -43,11 +51,14 @@
                         <constraints>
                             <constraint firstItem="6Tk-OE-BBY" firstAttribute="trailing" secondItem="sfY-UI-rPu" secondAttribute="trailing" constant="16" id="Hdm-td-UiH"/>
                             <constraint firstItem="sfY-UI-rPu" firstAttribute="top" secondItem="6Tk-OE-BBY" secondAttribute="top" constant="20" id="UKH-AP-Duf"/>
-                            <constraint firstItem="sfY-UI-rPu" firstAttribute="centerY" secondItem="8bC-Xf-vdC" secondAttribute="centerY" constant="-2.5" id="do6-Ft-yeN"/>
+                            <constraint firstItem="sfY-UI-rPu" firstAttribute="centerY" secondItem="8bC-Xf-vdC" secondAttribute="centerY" constant="-225" id="do6-Ft-yeN"/>
                             <constraint firstItem="sfY-UI-rPu" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" constant="16" id="m4a-2S-leS"/>
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="6Tk-OE-BBY"/>
                     </view>
+                    <connections>
+                        <outlet property="tf2" destination="w3n-2s-CMJ" id="1rR-U7-5wY"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
             </objects>

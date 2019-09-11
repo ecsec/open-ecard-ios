@@ -22,7 +22,7 @@ class ViewController: UIViewController {
         // Dispose of any resources that can be recreated.
     }
 
-    
+    @IBOutlet weak var tf2: UITextView!
     
     
     @IBAction func defaultHandler(_ sender: UIButton) {
@@ -35,11 +35,17 @@ func doThingsWithFramework() {
         let framework = NFCTestFrameworkInstance()
     
     class CallableThingyImp :NSObject,CallableThingy{
+        
+        let tfref:UITextView
+        init(tf:UITextView){
+            tfref = tf
+        }
+        
         func call(_ s: String){
-            print(s)
+            tfref.text=s
         }
     }
-    let cti = CallableThingyImp()
+    let cti = CallableThingyImp(tf:tf2)
         let caller = framework?.getThingyCaller()
     caller?.call(cti)
     }
