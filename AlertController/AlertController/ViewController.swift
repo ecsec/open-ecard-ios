@@ -8,13 +8,14 @@
 
 import UIKit
 import CoreNFC
-import NFCTestFramework
+import MyFrameworkProtocol
 
 class ViewController: UIViewController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
         // Do any additional setup after loading the view, typically from a nib.
+   //       doThingsWithProcessorFramework()
     }
 
     override func didReceiveMemoryWarning() {
@@ -24,32 +25,19 @@ class ViewController: UIViewController {
 
     @IBOutlet weak var tf2: UITextView!
     
+    var i:Int32=0
     
     @IBAction func defaultHandler(_ sender: UIButton) {
-        doThingsWithFramework()
+        doThingsWithProcessorFramework()
         
     }
 
-var session: NFCTagReaderSession?
-func doThingsWithFramework() {
-        let framework = NFCTestFrameworkInstance()
-    
-    class CallableThingyImp :NSObject,CallableThingy{
-        
-        let tfref:UITextView
-        init(tf:UITextView){
-            tfref = tf
-        }
-        
-        func call(_ s: String){
-            tfref.text=s
-        }
+    func doThingsWithProcessorFramework(){
+        let frm = createSomeObject()
+        tf2.text = frm?.fun(i,2)
+        i += 1
     }
-    let cti = CallableThingyImp(tf:tf2)
-        let caller = framework?.getThingyCaller()
-    caller?.call(cti)
-    }
-   
+
     
 
 }

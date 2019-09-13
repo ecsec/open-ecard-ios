@@ -7,9 +7,9 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		2E42E601232A6D8E00F43239 /* MyFrameworkProtocol.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 2E42E5FF232A6D7900F43239 /* MyFrameworkProtocol.framework */; };
+		2E42E602232A6D8E00F43239 /* MyFrameworkProtocol.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 2E42E5FF232A6D7900F43239 /* MyFrameworkProtocol.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		2ED1F19D23224C5F0054B632 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 6C702FD220D7DA0E000083E1 /* Main.storyboard */; };
-		2ED1F1A2232251660054B632 /* NFCTestFramework.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 2ED1F1A0232251220054B632 /* NFCTestFramework.framework */; };
-		2ED1F1A3232251660054B632 /* NFCTestFramework.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 2ED1F1A0232251220054B632 /* NFCTestFramework.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		6C702FCF20D7DA0E000083E1 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6C702FCE20D7DA0E000083E1 /* AppDelegate.swift */; };
 		6C702FD120D7DA0E000083E1 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6C702FD020D7DA0E000083E1 /* ViewController.swift */; };
 		6C702FD620D7DA0E000083E1 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 6C702FD520D7DA0E000083E1 /* Assets.xcassets */; };
@@ -23,7 +23,7 @@
 			dstPath = "";
 			dstSubfolderSpec = 10;
 			files = (
-				2ED1F1A3232251660054B632 /* NFCTestFramework.framework in Embed Frameworks */,
+				2E42E602232A6D8E00F43239 /* MyFrameworkProtocol.framework in Embed Frameworks */,
 			);
 			name = "Embed Frameworks";
 			runOnlyForDeploymentPostprocessing = 0;
@@ -31,8 +31,8 @@
 /* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
+		2E42E5FF232A6D7900F43239 /* MyFrameworkProtocol.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = MyFrameworkProtocol.framework; sourceTree = "<group>"; };
 		2ED1F19F23224C600054B632 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/Main.strings; sourceTree = "<group>"; };
-		2ED1F1A0232251220054B632 /* NFCTestFramework.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = NFCTestFramework.framework; sourceTree = "<group>"; };
 		2ED1F1A5232251A00054B632 /* AlertController.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = AlertController.entitlements; sourceTree = "<group>"; };
 		6C702FCB20D7DA0E000083E1 /* AlertController.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = AlertController.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		6C702FCE20D7DA0E000083E1 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
@@ -48,7 +48,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				2ED1F1A2232251660054B632 /* NFCTestFramework.framework in Frameworks */,
+				2E42E601232A6D8E00F43239 /* MyFrameworkProtocol.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -60,7 +60,7 @@
 			children = (
 				6C702FCD20D7DA0E000083E1 /* AlertController */,
 				6C702FCC20D7DA0E000083E1 /* Products */,
-				2ED1F1A0232251220054B632 /* NFCTestFramework.framework */,
+				2E42E5FF232A6D7900F43239 /* MyFrameworkProtocol.framework */,
 			);
 			sourceTree = "<group>";
 		};
@@ -114,7 +114,7 @@
 			isa = PBXProject;
 			attributes = {
 				LastSwiftUpdateCheck = 0920;
-				LastUpgradeCheck = 0920;
+				LastUpgradeCheck = 1100;
 				ORGANIZATIONNAME = "Mihir Pipermitwala";
 				TargetAttributes = {
 					6C702FCA20D7DA0E000083E1 = {
@@ -201,6 +201,7 @@
 				CLANG_WARN_BOOL_CONVERSION = YES;
 				CLANG_WARN_COMMA = YES;
 				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DEPRECATED_OBJC_IMPLEMENTATIONS = YES;
 				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
 				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
 				CLANG_WARN_EMPTY_BODY = YES;
@@ -208,6 +209,7 @@
 				CLANG_WARN_INFINITE_RECURSION = YES;
 				CLANG_WARN_INT_CONVERSION = YES;
 				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
+				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
 				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
 				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
 				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
@@ -235,7 +237,7 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 11.2;
+				IPHONEOS_DEPLOYMENT_TARGET = 13.0;
 				MTL_ENABLE_DEBUG_INFO = YES;
 				ONLY_ACTIVE_ARCH = YES;
 				SDKROOT = iphoneos;
@@ -258,6 +260,7 @@
 				CLANG_WARN_BOOL_CONVERSION = YES;
 				CLANG_WARN_COMMA = YES;
 				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DEPRECATED_OBJC_IMPLEMENTATIONS = YES;
 				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
 				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
 				CLANG_WARN_EMPTY_BODY = YES;
@@ -265,6 +268,7 @@
 				CLANG_WARN_INFINITE_RECURSION = YES;
 				CLANG_WARN_INT_CONVERSION = YES;
 				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
+				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
 				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
 				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
 				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
@@ -286,7 +290,7 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 11.2;
+				IPHONEOS_DEPLOYMENT_TARGET = 13.0;
 				MTL_ENABLE_DEBUG_INFO = NO;
 				SDKROOT = iphoneos;
 				SWIFT_OPTIMIZATION_LEVEL = "-Owholemodule";
