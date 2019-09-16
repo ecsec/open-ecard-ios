@@ -34,7 +34,7 @@ class ViewController: UIViewController {
 
     func doThingsWithProcessorFramework(){
         let frm = createSomeObject()
-        tf2.text = frm?.fun(i,2)
+  
         i += 1
     }
 
