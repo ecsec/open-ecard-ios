@@ -15,7 +15,7 @@ class ViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         // Do any additional setup after loading the view, typically from a nib.
-   //       doThingsWithProcessorFramework()
+          doThingsWithProcessorFramework()
     }
 
     override func didReceiveMemoryWarning() {
@@ -25,17 +25,25 @@ class ViewController: UIViewController {
 
     @IBOutlet weak var tf2: UITextView!
     
-    var i:Int32=0
-    
     @IBAction func defaultHandler(_ sender: UIButton) {
         doThingsWithProcessorFramework()
         
     }
 
     func doThingsWithProcessorFramework(){
-        let frm = createSomeObject()
-  
-        i += 1
+        let frm = getFrameworkInstance()
+        frm?.fun()
+        frm?.fun("a string")
+        frm?.otherfun(42)
+        
+        let imp = frm?.getSomeImp()
+        imp?.someFun()
+        
+        let innerimp = frm?.getSomeInnerImp()
+        innerimp?.someInnerFun()
+        innerimp?.someFun()
+     //  let frm2 = createSomeInnerObject()
+     //   frm2?.innerFun()
     }
 
     

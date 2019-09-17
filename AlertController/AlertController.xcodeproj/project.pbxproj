@@ -7,8 +7,8 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		2E42E601232A6D8E00F43239 /* MyFrameworkProtocol.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 2E42E5FF232A6D7900F43239 /* MyFrameworkProtocol.framework */; };
-		2E42E602232A6D8E00F43239 /* MyFrameworkProtocol.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 2E42E5FF232A6D7900F43239 /* MyFrameworkProtocol.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
+		2E80380F232F9A960097E720 /* MyFrameworkProtocol.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 2E80380D232F99EF0097E720 /* MyFrameworkProtocol.framework */; };
+		2E803810232F9A960097E720 /* MyFrameworkProtocol.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 2E80380D232F99EF0097E720 /* MyFrameworkProtocol.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		2ED1F19D23224C5F0054B632 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 6C702FD220D7DA0E000083E1 /* Main.storyboard */; };
 		6C702FCF20D7DA0E000083E1 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6C702FCE20D7DA0E000083E1 /* AppDelegate.swift */; };
 		6C702FD120D7DA0E000083E1 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6C702FD020D7DA0E000083E1 /* ViewController.swift */; };
@@ -23,7 +23,7 @@
 			dstPath = "";
 			dstSubfolderSpec = 10;
 			files = (
-				2E42E602232A6D8E00F43239 /* MyFrameworkProtocol.framework in Embed Frameworks */,
+				2E803810232F9A960097E720 /* MyFrameworkProtocol.framework in Embed Frameworks */,
 			);
 			name = "Embed Frameworks";
 			runOnlyForDeploymentPostprocessing = 0;
@@ -31,7 +31,7 @@
 /* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
-		2E42E5FF232A6D7900F43239 /* MyFrameworkProtocol.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = MyFrameworkProtocol.framework; sourceTree = "<group>"; };
+		2E80380D232F99EF0097E720 /* MyFrameworkProtocol.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = MyFrameworkProtocol.framework; sourceTree = "<group>"; };
 		2ED1F19F23224C600054B632 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/Main.strings; sourceTree = "<group>"; };
 		2ED1F1A5232251A00054B632 /* AlertController.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = AlertController.entitlements; sourceTree = "<group>"; };
 		6C702FCB20D7DA0E000083E1 /* AlertController.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = AlertController.app; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -48,7 +48,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				2E42E601232A6D8E00F43239 /* MyFrameworkProtocol.framework in Frameworks */,
+				2E80380F232F9A960097E720 /* MyFrameworkProtocol.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -60,7 +60,7 @@
 			children = (
 				6C702FCD20D7DA0E000083E1 /* AlertController */,
 				6C702FCC20D7DA0E000083E1 /* Products */,
-				2E42E5FF232A6D7900F43239 /* MyFrameworkProtocol.framework */,
+				2E80380D232F99EF0097E720 /* MyFrameworkProtocol.framework */,
 			);
 			sourceTree = "<group>";
 		};
