@@ -8,14 +8,25 @@
 
 import UIKit
 import CoreNFC
-import MyFrameworkProtocol
+import OpenEcard
 
 class ViewController: UIViewController {
 
+    class ContextCompletion: NSObject, OpeneCardServiceHandlerProtocol{
+        func onSuccess() {
+            print("Context process completed successfully.")
+        }
+        
+        func onFailure(_ response: (NSObjectProtocol & ServiceErrorResponseProtocol)!) {
+            print("Context process completed successfully.")
+        }
+    }
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         // Do any additional setup after loading the view, typically from a nib.
-          doThingsWithProcessorFramework()
+        doSomethingWithOpeneCard()
+        //  doThingsWithProcessorFramework()
     }
 
     override func didReceiveMemoryWarning() {
@@ -26,22 +37,34 @@ class ViewController: UIViewController {
     @IBOutlet weak var tf2: UITextView!
     
     @IBAction func defaultHandler(_ sender: UIButton) {
-        doThingsWithProcessorFramework()
+        
+        doSomethingWithOpeneCard()
+        // doThingsWithProcessorFramework()
         
     }
 
+    func doSomethingWithOpeneCard() {
+        let frm = createActivationUtils()
+        
+        print(frm)
+        let context = frm?.context()
+        print(context)
+        //let helper = ContextCompletion()
+        //context?.start(helper)
+    }
+    
     func doThingsWithProcessorFramework(){
-        let frm = getFrameworkInstance()
-        frm?.fun()
-        frm?.fun("a string")
-        frm?.otherfun(42)
-        
-        let imp = frm?.getSomeImp()
-        imp?.someFun()
-        
-        let innerimp = frm?.getSomeInnerImp()
-        innerimp?.someInnerFun()
-        innerimp?.someFun()
+//        let frm = getFrameworkInstance()
+//        frm?.fun()
+//        frm?.fun("a string")
+//        frm?.otherfun(42)
+//        
+//        let imp = frm?.getSomeImp()
+//        imp?.someFun()
+//        
+//        let innerimp = frm?.getSomeInnerImp()
+//        innerimp?.someInnerFun()
+//        innerimp?.someFun()
      //  let frm2 = createSomeInnerObject()
      //   frm2?.innerFun()
     }
