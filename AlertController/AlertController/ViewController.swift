@@ -44,7 +44,7 @@ class ViewController: UIViewController {
     }
 
     func doSomethingWithOpeneCard() {
-        let frm = createActivationUtils()
+        let frm = createOpenEcard()
         
         print(frm)
         let context = frm?.context()
