@@ -13,8 +13,20 @@ import OpenEcard
 class ViewController: UIViewController {
 
     class ContextCompletion: NSObject, OpeneCardServiceHandlerProtocol{
+        var frm : OpenEcardProtocol? = nil;
+       
+        override init(){
+        }
+        
+      
+        func setFrm(frm : OpenEcardProtocol){
+            self.frm = frm;
+        }
+        
         func onSuccess() {
             print("Context process completed successfully.")
+            frm!.triggerNFC()
+            
         }
         
         func onFailure(_ response: (NSObjectProtocol & ServiceErrorResponseProtocol)!) {
@@ -22,9 +34,14 @@ class ViewController: UIViewController {
         }
     }
     
+    lazy var frm = createOpenEcard()
+    var helper = ContextCompletion()
+   
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         // Do any additional setup after loading the view, typically from a nib.
+        
         doSomethingWithOpeneCard()
         //  doThingsWithProcessorFramework()
     }
@@ -44,13 +61,18 @@ class ViewController: UIViewController {
     }
 
     func doSomethingWithOpeneCard() {
-        let frm = createOpenEcard()
+        self.frm = createOpenEcard()
         
         print(frm)
+        
         let context = frm?.context()
         print(context)
-        //let helper = ContextCompletion()
-        //context?.start(helper)
+        
+
+        helper.setFrm(frm: frm!)
+        context?.start(helper)
+
+
     }
     
     func doThingsWithProcessorFramework(){
