@@ -14,6 +14,12 @@ import OpenEcard.open_ecard_mobile_lib
 class ViewController: UIViewController {
 
     class EacControllerStart: NSObject, ControllerCallbackProtocol, EacInteractionProtocol {
+        let frm : OpenEcardProtocol;
+        init(frm : OpenEcardProtocol) {
+            self.frm = frm;
+            super.init()
+        }
+ 
         func onCanRequest(_ enterCan: (NSObjectProtocol & ConfirmPasswordOperationProtocol)!) {
             
         }
@@ -37,16 +43,8 @@ class ViewController: UIViewController {
         func onCardRecognized(_ msgHandler: (NSObjectProtocol & NFCOverlayMessageHandlerProtocol)!) {
             print("on card recognized ")
             msgHandler.setText("card recognized")
-            
         }
-        
-        
-        let frm : OpenEcardProtocol;
-        init(frm : OpenEcardProtocol) {
-            self.frm = frm;
-            super.init()
-        }
-        
+       
         func onPinRequest(_ attempt: Int32, withEnterPin enterPin: (NSObjectProtocol & ConfirmPasswordOperationProtocol)!) {
             print("onPinRequest");
             enterPin.enter("123456")
@@ -74,8 +72,6 @@ class ViewController: UIViewController {
             print("onTransactionInfo");
         }
         
-       
-        
         func onInteractionComplete() {
             
             print("onInteractionComplete");
@@ -99,7 +95,8 @@ class ViewController: UIViewController {
         }
         
         func onAuthenticationCompletion(_ result: (NSObjectProtocol & ActivationResultProtocol)!) {
-            print("onAuthenticationCompletion", result);        }
+            print("onAuthenticationCompletion", result);        
+        }
         
         
     }
@@ -127,11 +124,7 @@ class ViewController: UIViewController {
             let baseUrl = "http://localhost/eID-Client?tcTokenURL="
             let tcTokenUrl = "https%3A%2F%2Ftest.governikus-eid.de%3A443%2FAutent-DemoApplication%2FRequestServlet%3B%3Fprovider%3Ddemo_epa_20%26redirect%3Dtrue"
             self.currentController = self.eacFactory?.create(baseUrl + tcTokenUrl, withActivation: currentEacActivation, with: currentEacActivation);
-            
-            // DispatchQueue.global(qos: .userInitiated).async {
-            //self.currentController?.start()
-            // }
-            
+           
         }
         
         func onFailure(_ response: (NSObjectProtocol & ServiceErrorResponseProtocol)!) {
@@ -145,24 +138,16 @@ class ViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        // Do any additional setup after loading the view, typically from a nib.
-        
-       doSomethingWithOpeneCard()
-        //  doThingsWithProcessorFramework()
     }
 
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
-        // Dispose of any resources that can be recreated.
     }
 
     @IBOutlet weak var tf2: UITextView!
     
     @IBAction func defaultHandler(_ sender: UIButton) {
-        
         doSomethingWithOpeneCard()
-        // doThingsWithProcessorFramework()
-        
     }
 
     func doSomethingWithOpeneCard() {
@@ -180,23 +165,5 @@ class ViewController: UIViewController {
         print("Starting the openecard framework");
         context?.start(helper)
     }
-    
-    func doThingsWithProcessorFramework(){
-//        let frm = getFrameworkInstance()
-//        frm?.fun()
-//        frm?.fun("a string")
-//        frm?.otherfun(42)
-//        
-//        let imp = frm?.getSomeImp()
-//        imp?.someFun()
-//        
-//        let innerimp = frm?.getSomeInnerImp()
-//        innerimp?.someInnerFun()
-//        innerimp?.someFun()
-     //  let frm2 = createSomeInnerObject()
-     //   frm2?.innerFun()
-    }
-
-    
 
 }
