@@ -14,6 +14,22 @@ import OpenEcard.open_ecard_mobile_lib
 class ViewController: UIViewController {
 
     class EacControllerStart: NSObject, ControllerCallbackProtocol, EacInteractionProtocol {
+        func onCanRequest(_ enterCan: (NSObjectProtocol & ConfirmPasswordOperationProtocol)!) {
+            
+        }
+        
+        func onServerData(_ data: (NSObjectProtocol & ServerDataProtocol)!, withTransactionData transactionData: String!, withSelectReadWrite selectReadWrite: (NSObjectProtocol & ConfirmAttributeSelectionOperationProtocol)!) {
+            
+        }
+        
+        func onCardAuthenticationSuccessful() {
+            
+        }
+        
+        func onCardInteractionComplete() {
+            
+        }
+        
         func onCardRecognized() {
             print("on card recognized the wrong one")
         }
@@ -58,9 +74,7 @@ class ViewController: UIViewController {
             print("onTransactionInfo");
         }
         
-        func onPinStatus(_ status: PinStatus, withCardType cardType: String!) {
-            
-        }
+       
         
         func onInteractionComplete() {
             
