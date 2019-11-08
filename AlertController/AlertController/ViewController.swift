@@ -147,4 +147,6 @@ class ViewController: UIViewController {
         context?.start(ctxCompletion)
     }
 
+    @IBAction func pinMgmt(_ sender: Any) {
+    }
 }

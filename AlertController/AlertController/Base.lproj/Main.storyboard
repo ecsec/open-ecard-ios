@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="14865.1" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="BYZ-38-t0r">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="15400" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="BYZ-38-t0r">
     <device id="retina4_7" orientation="portrait" appearance="light"/>
     <dependencies>
         <deployment version="4864" identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="14819.2"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="15404"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
@@ -16,43 +16,48 @@
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="sfY-UI-rPu">
-                                <rect key="frame" x="16" y="20" width="343" height="177"/>
-                                <subviews>
-                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="EeM-Wr-hRO">
-                                        <rect key="frame" x="8" y="84" width="327" height="30"/>
-                                        <color key="backgroundColor" systemColor="systemGreenColor" red="0.20392156859999999" green="0.78039215689999997" blue="0.34901960780000002" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-                                        <color key="tintColor" cocoaTouchSystemColor="darkTextColor"/>
-                                        <state key="normal" title="do things!">
-                                            <color key="titleColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                                        </state>
-                                        <connections>
-                                            <action selector="defaultHandler:" destination="BYZ-38-t0r" eventType="touchUpInside" id="8yN-73-S54"/>
-                                        </connections>
-                                    </button>
-                                    <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" fixedFrame="YES" restorationIdentifier="tf" text="txt" textAlignment="natural" translatesAutoresizingMaskIntoConstraints="NO" id="w3n-2s-CMJ" userLabel="tf2">
-                                        <rect key="frame" x="8" y="177" width="327" height="437"/>
-                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                        <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
-                                        <color key="textColor" systemColor="labelColor" cocoaTouchSystemColor="darkTextColor"/>
-                                        <fontDescription key="fontDescription" type="system" pointSize="14"/>
-                                        <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
-                                    </textView>
-                                </subviews>
-                                <color key="backgroundColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                                <constraints>
-                                    <constraint firstItem="EeM-Wr-hRO" firstAttribute="leading" secondItem="sfY-UI-rPu" secondAttribute="leading" constant="8" id="Ydf-FW-7kk"/>
-                                    <constraint firstAttribute="trailing" secondItem="EeM-Wr-hRO" secondAttribute="trailing" constant="8" id="jVk-M8-Z09"/>
-                                    <constraint firstAttribute="bottom" secondItem="EeM-Wr-hRO" secondAttribute="bottom" constant="63" id="jnQ-wm-dLD"/>
-                                </constraints>
-                            </view>
+                            <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" restorationIdentifier="tf" text="url" textAlignment="center" translatesAutoresizingMaskIntoConstraints="NO" id="w3n-2s-CMJ" userLabel="tf2">
+                                <rect key="frame" x="24" y="299" width="327" height="69"/>
+                                <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
+                                <color key="textColor" systemColor="labelColor" cocoaTouchSystemColor="darkTextColor"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
+                            </textView>
+                            <button opaque="NO" contentMode="scaleToFill" misplaced="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="ph4-Aq-1wB">
+                                <rect key="frame" x="24" y="421" width="327" height="30"/>
+                                <color key="backgroundColor" systemColor="systemGreenColor" red="0.20392156859999999" green="0.78039215689999997" blue="0.34901960780000002" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                <color key="tintColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                <state key="normal" title="PINMgmt">
+                                    <color key="titleColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                </state>
+                                <connections>
+                                    <action selector="pinMgmt:" destination="BYZ-38-t0r" eventType="touchUpInside" id="FAu-4d-CLR"/>
+                                </connections>
+                            </button>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="EeM-Wr-hRO" userLabel="Die">
+                                <rect key="frame" x="24" y="376" width="327" height="30"/>
+                                <color key="backgroundColor" systemColor="systemGreenColor" red="0.20392156859999999" green="0.78039215689999997" blue="0.34901960780000002" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                <color key="tintColor" cocoaTouchSystemColor="darkTextColor"/>
+                                <state key="normal" title="EAC">
+                                    <color key="titleColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                </state>
+                                <connections>
+                                    <action selector="defaultHandler:" destination="BYZ-38-t0r" eventType="touchUpInside" id="8yN-73-S54"/>
+                                </connections>
+                            </button>
                         </subviews>
                         <color key="backgroundColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         <constraints>
-                            <constraint firstItem="6Tk-OE-BBY" firstAttribute="trailing" secondItem="sfY-UI-rPu" secondAttribute="trailing" constant="16" id="Hdm-td-UiH"/>
-                            <constraint firstItem="sfY-UI-rPu" firstAttribute="top" secondItem="6Tk-OE-BBY" secondAttribute="top" constant="20" id="UKH-AP-Duf"/>
-                            <constraint firstItem="sfY-UI-rPu" firstAttribute="centerY" secondItem="8bC-Xf-vdC" secondAttribute="centerY" constant="-225" id="do6-Ft-yeN"/>
-                            <constraint firstItem="sfY-UI-rPu" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" constant="16" id="m4a-2S-leS"/>
+                            <constraint firstItem="w3n-2s-CMJ" firstAttribute="centerX" secondItem="8bC-Xf-vdC" secondAttribute="centerX" id="Ehg-fK-6Xt"/>
+                            <constraint firstItem="ph4-Aq-1wB" firstAttribute="leading" secondItem="8bC-Xf-vdC" secondAttribute="leadingMargin" id="SWF-t9-prr"/>
+                            <constraint firstItem="ph4-Aq-1wB" firstAttribute="centerX" secondItem="EeM-Wr-hRO" secondAttribute="centerX" id="VKW-ce-uBX"/>
+                            <constraint firstItem="EeM-Wr-hRO" firstAttribute="leading" secondItem="w3n-2s-CMJ" secondAttribute="leading" id="Xrp-f9-0J4"/>
+                            <constraint firstItem="w3n-2s-CMJ" firstAttribute="top" secondItem="6Tk-OE-BBY" secondAttribute="top" constant="299" id="cbV-G0-VFu"/>
+                            <constraint firstItem="ph4-Aq-1wB" firstAttribute="top" secondItem="EeM-Wr-hRO" secondAttribute="bottom" constant="15" id="gz0-aM-hhQ"/>
+                            <constraint firstItem="EeM-Wr-hRO" firstAttribute="trailing" secondItem="w3n-2s-CMJ" secondAttribute="trailing" id="i6v-5q-TTt"/>
+                            <constraint firstItem="EeM-Wr-hRO" firstAttribute="top" secondItem="w3n-2s-CMJ" secondAttribute="bottom" constant="8" id="oBR-so-eqq"/>
+                            <constraint firstItem="w3n-2s-CMJ" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" constant="24" id="oaa-lu-2yg"/>
+                            <constraint firstItem="w3n-2s-CMJ" firstAttribute="centerY" secondItem="8bC-Xf-vdC" secondAttribute="centerY" id="oyI-Z7-acC"/>
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="6Tk-OE-BBY"/>
                     </view>
