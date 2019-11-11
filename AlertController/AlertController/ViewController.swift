@@ -161,13 +161,11 @@ class ViewController: UIViewController {
         
         func onCardAuthenticationSuccessful() {
             print("onCardAuthenticationSuccessful")
-            
         }
         
         func onCardRecognized() {
             print("on card recognized the wrong one")
         }
-      
       
         func onCardBlocked() {
             print("onCardBlocked")
@@ -183,7 +181,6 @@ class ViewController: UIViewController {
         func onTransactionInfo(_ data: String!) {
             print("onTransactionInfo");
         }
-       
         
         func onCardRemoved() {
             print("onCardRemoved");
@@ -207,6 +204,7 @@ class ViewController: UIViewController {
         var currentEacActivation: EacControllerStart? = nil;
         var currentController: ActivationControllerProtocol? = nil;
         var v: ViewController?
+        var url : String?
       
         func setFrm(frm : OpenEcardProtocol){
             self.frm = frm;
@@ -214,6 +212,11 @@ class ViewController: UIViewController {
      
         func setViewCtrl(v:ViewController){
             self.v = v
+        }
+
+        func setURL(url: String){
+            self.url = url
+
         }
         
         func onSuccess(_ source: (NSObjectProtocol & ActivationSourceProtocol)!) {
@@ -223,9 +226,8 @@ class ViewController: UIViewController {
             self.currentEacActivation = EacControllerStart(frm: frm!, v:v!);
             
             
-            let baseUrl = "http://localhost/eID-Client?tcTokenURL="
-            let tcTokenUrl = "https%3A%2F%2Ftest.governikus-eid.de%3A443%2FAutent-DemoApplication%2FRequestServlet%3B%3Fprovider%3Ddemo_epa_20%26redirect%3Dtrue"
-            self.currentController = self.eacFactory?.create(baseUrl + tcTokenUrl, withActivation: currentEacActivation, with: currentEacActivation);
+            
+            self.currentController = self.eacFactory?.create(self.url, withActivation: currentEacActivation, with: currentEacActivation);
            
         }
         
@@ -244,10 +246,9 @@ class ViewController: UIViewController {
         //	private static final String DEFAULT_TC_TOKEN_URL = "https://test.governikus-eid.de:443/Autent-DemoApplication/RequestServlet;?provider=demo_epa_20&redirect=true";
 	    //  private static final String DEFAULT_TC_TOKEN_URL = "https://test.governikus-eid.de:443/Autent-DemoApplication/RequestServlet;?provider=demo_epa_can&redirect=true";
         //	private static final String DEFAULT_TC_TOKEN_URL = "https://service.dev.skidentity.de:443/tctoken";
-        let urlstart = "http://localhost/eID-Client?tcTokenURL="
         let serviceURL = "https://service.dev.skidentity.de:443/tctoken";
      //   tf2.setText(urlstart + serviceURL)
-        tf2.text = urlstart+serviceURL
+        tf2.text = serviceURL
     }
 
     override func didReceiveMemoryWarning() {
@@ -258,9 +259,11 @@ class ViewController: UIViewController {
     
     @IBAction func defaultHandler(_ sender: UIButton) {
         print("Creating the context");
+        let urlstart = "http://localhost/eID-Client?tcTokenURL="
         let context = frm?.context("Please provide card", withDefaultNFCCardRecognizedMessage: "Found card")
         ctxCompletion.setFrm(frm: frm!)
         ctxCompletion.setViewCtrl(v:self)
+        ctxCompletion.setURL(url: urlstart + tf2.text.addingPercentEncoding(withAllowedCharacters: .urlHostAllowed)!)
         context?.start(ctxCompletion)
     }
 
