@@ -17,25 +17,14 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" restorationIdentifier="tf" text="activationURL" textAlignment="center" translatesAutoresizingMaskIntoConstraints="NO" id="w3n-2s-CMJ" userLabel="tf2">
-                                <rect key="frame" x="24" y="299" width="327" height="69"/>
+                                <rect key="frame" x="24" y="112" width="327" height="69"/>
                                 <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
                                 <color key="textColor" systemColor="labelColor" cocoaTouchSystemColor="darkTextColor"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                 <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
                             </textView>
-                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="ph4-Aq-1wB">
-                                <rect key="frame" x="24" y="421" width="327" height="30"/>
-                                <color key="backgroundColor" systemColor="systemGreenColor" red="0.20392156859999999" green="0.78039215689999997" blue="0.34901960780000002" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-                                <color key="tintColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                                <state key="normal" title="PINMgmt">
-                                    <color key="titleColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                                </state>
-                                <connections>
-                                    <action selector="pinMgmt:" destination="BYZ-38-t0r" eventType="touchUpInside" id="FAu-4d-CLR"/>
-                                </connections>
-                            </button>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="EeM-Wr-hRO" userLabel="Die">
-                                <rect key="frame" x="24" y="376" width="327" height="30"/>
+                                <rect key="frame" x="24" y="199" width="327" height="30"/>
                                 <color key="backgroundColor" systemColor="systemGreenColor" red="0.20392156859999999" green="0.78039215689999997" blue="0.34901960780000002" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 <color key="tintColor" cocoaTouchSystemColor="darkTextColor"/>
                                 <state key="normal" title="EAC">
@@ -45,18 +34,29 @@
                                     <action selector="defaultHandler:" destination="BYZ-38-t0r" eventType="touchUpInside" id="8yN-73-S54"/>
                                 </connections>
                             </button>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="ph4-Aq-1wB">
+                                <rect key="frame" x="24" y="248" width="327" height="30"/>
+                                <color key="backgroundColor" systemColor="systemGreenColor" red="0.20392156859999999" green="0.78039215689999997" blue="0.34901960780000002" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                <color key="tintColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                <state key="normal" title="PINMgmt">
+                                    <color key="titleColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                </state>
+                                <connections>
+                                    <action selector="pinMgmt:" destination="BYZ-38-t0r" eventType="touchUpInside" id="FAu-4d-CLR"/>
+                                </connections>
+                            </button>
                         </subviews>
                         <color key="backgroundColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         <constraints>
                             <constraint firstItem="ph4-Aq-1wB" firstAttribute="trailing" secondItem="EeM-Wr-hRO" secondAttribute="trailing" id="9Wm-fA-wSQ"/>
                             <constraint firstItem="w3n-2s-CMJ" firstAttribute="centerX" secondItem="8bC-Xf-vdC" secondAttribute="centerX" id="Ehg-fK-6Xt"/>
-                            <constraint firstItem="ph4-Aq-1wB" firstAttribute="top" secondItem="EeM-Wr-hRO" secondAttribute="bottom" constant="15" id="U7d-78-gM9"/>
+                            <constraint firstItem="ph4-Aq-1wB" firstAttribute="top" secondItem="EeM-Wr-hRO" secondAttribute="bottom" constant="19" id="U7d-78-gM9"/>
                             <constraint firstItem="EeM-Wr-hRO" firstAttribute="leading" secondItem="w3n-2s-CMJ" secondAttribute="leading" id="Xrp-f9-0J4"/>
-                            <constraint firstItem="w3n-2s-CMJ" firstAttribute="top" secondItem="6Tk-OE-BBY" secondAttribute="top" constant="299" id="cbV-G0-VFu"/>
+                            <constraint firstItem="w3n-2s-CMJ" firstAttribute="top" secondItem="6Tk-OE-BBY" secondAttribute="top" constant="112" id="cbV-G0-VFu"/>
                             <constraint firstItem="EeM-Wr-hRO" firstAttribute="trailing" secondItem="w3n-2s-CMJ" secondAttribute="trailing" id="i6v-5q-TTt"/>
-                            <constraint firstItem="EeM-Wr-hRO" firstAttribute="top" secondItem="w3n-2s-CMJ" secondAttribute="bottom" constant="8" id="oBR-so-eqq"/>
+                            <constraint firstItem="EeM-Wr-hRO" firstAttribute="top" secondItem="w3n-2s-CMJ" secondAttribute="bottom" constant="18" id="oBR-so-eqq"/>
                             <constraint firstItem="w3n-2s-CMJ" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" constant="24" id="oaa-lu-2yg"/>
-                            <constraint firstItem="w3n-2s-CMJ" firstAttribute="centerY" secondItem="8bC-Xf-vdC" secondAttribute="centerY" id="oyI-Z7-acC"/>
+                            <constraint firstItem="w3n-2s-CMJ" firstAttribute="centerY" secondItem="8bC-Xf-vdC" secondAttribute="centerY" constant="-187" id="oyI-Z7-acC"/>
                             <constraint firstItem="ph4-Aq-1wB" firstAttribute="leading" secondItem="EeM-Wr-hRO" secondAttribute="leading" id="pjR-ki-w9n"/>
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="6Tk-OE-BBY"/>
