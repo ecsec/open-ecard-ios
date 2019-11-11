@@ -19,7 +19,7 @@ class ViewController: UIViewController {
         var v :ViewController
         
         init(frm : OpenEcardProtocol, v:ViewController) {
-             self.v = v
+            self.v = v
             self.frm = frm
             self.msgHandler = nil
             super.init()
@@ -45,9 +45,9 @@ class ViewController: UIViewController {
 
                 let alert = UIAlertController(title: "Enter pin", message: "", preferredStyle: .alert)
                            //Add the text field. You can configure it however you need.
-                alert.addTextField { (pwd) in
-                    pwd.placeholder = "pin/can"
-                    pwd.isSecureTextEntry = true
+                alert.addTextField { (pin) in
+                    pin.placeholder = "pin/can"
+                    pin.isSecureTextEntry = true
                 }
 
                 //the cancel action doing nothing
@@ -55,13 +55,13 @@ class ViewController: UIViewController {
 
                 //the confirm action taking the inputs
                 let acceptAction = UIAlertAction(title: "Enter", style: .default, handler: { [weak alert] (_) in
-                    guard let pwd = alert?.textFields?[0] else {
+                    guard let pin = alert?.textFields?[0] else {
                         print("Issue with Alert TextFields")
                         return
                     }
 
                     DispatchQueue.global(qos: .background).async{
-                        enterPin.enter(pwd.text)
+                        enterPin.enter(pin.text)
                     }
 
                 })
@@ -79,11 +79,79 @@ class ViewController: UIViewController {
 
         func onPinCanRequest(_ enterPinCan: (NSObjectProtocol & ConfirmTwoPasswordsOperationProtocol)!) {
             print("onPinCanRequest")
+            DispatchQueue.main.async{
+
+                let alert = UIAlertController(title: "Enter pin/can", message: "", preferredStyle: .alert)
+                           //Add the text field. You can configure it however you need.
+                alert.addTextField { (pin) in
+                    pin.placeholder = "pin"
+                    pin.isSecureTextEntry = true
+                }
+                alert.addTextField { (can) in
+                    can.placeholder = "can"
+                    can.isSecureTextEntry = true
+                }
+
+                //the cancel action doing nothing
+                let cancelAction = UIAlertAction(title: "Cancel", style: .destructive)
+
+                //the confirm action taking the inputs
+                let acceptAction = UIAlertAction(title: "Enter", style: .default, handler: { [weak alert] (_) in
+                    guard let pin = alert?.textFields?[0], let can = alert?.textFields?[1] else {
+                        print("Issue with Alert TextFields")
+                        return
+                    }
+
+                    DispatchQueue.global(qos: .background).async{
+                        enterPinCan.enter(pin.text, withSecondPassword: can.text)
+                    }
+
+                })
+
+                //adding the actions to alertController
+                alert.addAction(acceptAction)
+                alert.addAction(cancelAction)
+
+                // Presenting the alert
+                self.v.present(alert, animated: true, completion: nil)
+            }
+
         }
 
         func onCanRequest(_ enterCan: (NSObjectProtocol & ConfirmPasswordOperationProtocol)!) {
             print("onCanRequest")
+            DispatchQueue.main.async{
 
+                let alert = UIAlertController(title: "Enter can", message: "", preferredStyle: .alert)
+                           //Add the text field. You can configure it however you need.
+                alert.addTextField { (can) in
+                    can.placeholder = "can"
+                    can.isSecureTextEntry = true
+                }
+
+                //the cancel action doing nothing
+                let cancelAction = UIAlertAction(title: "Cancel", style: .destructive)
+
+                //the confirm action taking the inputs
+                let acceptAction = UIAlertAction(title: "Enter", style: .default, handler: { [weak alert] (_) in
+                    guard let can = alert?.textFields?[0] else {
+                        print("Issue with Alert TextFields")
+                        return
+                    }
+
+                    DispatchQueue.global(qos: .background).async{
+                        enterCan.enter(can.text)
+                    }
+
+                })
+
+                //adding the actions to alertController
+                alert.addAction(acceptAction)
+                alert.addAction(cancelAction)
+
+                // Presenting the alert
+                self.v.present(alert, animated: true, completion: nil)
+            }
         }
         
         func onServerData(_ data: (NSObjectProtocol & ServerDataProtocol)!, withTransactionData transactionData: String!, withSelectReadWrite selectReadWrite: (NSObjectProtocol & ConfirmAttributeSelectionOperationProtocol)!) {
@@ -196,37 +264,6 @@ class ViewController: UIViewController {
         context?.start(ctxCompletion)
     }
 
-    func showInputDia(_ what: String){
-        let alert = UIAlertController(title: "Enter \(what)", message: "", preferredStyle: .alert)
-                   //Add the text field. You can configure it however you need.
-        alert.addTextField { (pwd) in
-            pwd.placeholder = "pin/can"
-            pwd.isSecureTextEntry = true
-        }
-
-        //the cancel action doing nothing
-        let cancelAction = UIAlertAction(title: "Cancel", style: .destructive)
-
-        //the confirm action taking the inputs
-        let acceptAction = UIAlertAction(title: "Enter", style: .default, handler: { [weak alert] (_) in
-            guard let pwd = alert?.textFields?[0] else {
-                print("Issue with Alert TextFields")
-                return
-            }
-
-            print("Text field: \(pwd)")
-
-        })
-
-        //adding the actions to alertController
-        alert.addAction(acceptAction)
-        alert.addAction(cancelAction)
-
-        // Presenting the alert
-        self.present(alert, animated: true, completion: nil)
-    }
-
     @IBAction func pinMgmt(_ sender: Any) {
-        showInputDia("hi")
     }
 }
