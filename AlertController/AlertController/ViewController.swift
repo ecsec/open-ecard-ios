@@ -161,7 +161,7 @@ class ViewController: UIViewController {
         
         func onCardRecognized() {
             self.msgHandler?.setText("Card was detected")
-            print("on card recognized the wrong one")
+            print("on card recognized")
         }
       
         func onCardBlocked() {
@@ -203,6 +203,7 @@ class ViewController: UIViewController {
         var currentController: ActivationControllerProtocol? = nil;
         var v: ViewController?
         var url : String?
+        var ready = false
       
         func setFrm(frm : OpenEcardProtocol){
             self.frm = frm;
@@ -222,15 +223,21 @@ class ViewController: UIViewController {
             
             self.eacFactory = source.eacFactory();
             self.currentEacActivation = EacControllerStart(frm: frm!, v:v!);
+            self.ready = true
+
             
-            
-            
-            self.currentController = self.eacFactory?.create(self.url, withActivation: currentEacActivation, with: currentEacActivation);
-           
         }
-        
+
+        func performEAC(){
+            if(self.ready){
+                self.currentController = self.eacFactory?.create(self.url, withActivation: currentEacActivation, with: currentEacActivation);
+            }
+        }
+           
+
         func onFailure(_ response: (NSObjectProtocol & ServiceErrorResponseProtocol)!) {
             print("Context process completed successfully.")
+            self.ready = false 
         }
     }
     
@@ -248,27 +255,30 @@ class ViewController: UIViewController {
         let serviceURL_5 = "https://service.skidentity-test.de/backend/tr03130/activate-client?session=dLNNLJ7Oy7BEXnnOciqvzw"
 
         tf2.text = serviceURL_3
+
+        ini()
     }
 
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
     }
 
-    func performEAC(){
+
+    
+    func ini(){
         print("Creating the context");
+        var        context = frm?.context("Please provide card", withDefaultNFCCardRecognizedMessage: "Found card")
+        context?.start(ctxCompletion)
         let urlstart = "http://localhost/eID-Client?tcTokenURL="
-        let context = frm?.context("Please provide card", withDefaultNFCCardRecognizedMessage: "Found card")
         ctxCompletion.setFrm(frm: frm!)
         ctxCompletion.setViewCtrl(v:self)
         ctxCompletion.setURL(url: urlstart + frm!.prepareTCTokenURL(tf2.text))
-        context?.start(ctxCompletion)
-
     }
 
     @IBOutlet weak var tf2: UITextView!
     
     @IBAction func defaultHandler(_ sender: UIButton) {
-        performEAC()
+        ctxCompletion.performEAC()
     }
 
     @IBAction func pinMgmt(_ sender: Any) {
