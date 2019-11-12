@@ -243,10 +243,6 @@ class ViewController: UIViewController {
       	let serviceURL_3 = "https://service.dev.skidentity.de:443/tctoken";
 
         tf2.text = serviceURL_1
-
-        let ofNeil = "https%3A%2F%2Ftest.governikus-eid.de%3A443%2FAutent-DemoApplication%2FRequestServlet%3B%3Fprovider%3Ddemo_epa_20%26redirect%3Dtrue"
-        print("OETT: " + tf2.text.addingPercentEncoding(withAllowedCharacters: .urlUserAllowed)!)
-        print("OETT neil: " + ofNeil) 
     }
 
     override func didReceiveMemoryWarning() {
@@ -261,12 +257,8 @@ class ViewController: UIViewController {
         let context = frm?.context("Please provide card", withDefaultNFCCardRecognizedMessage: "Found card")
         ctxCompletion.setFrm(frm: frm!)
         ctxCompletion.setViewCtrl(v:self)
-
-        let ofNeil = "http://localhost/eID-Client?tcTokenURL=https%3A%2F%2Ftest.governikus-eid.de%3A443%2FAutent-DemoApplication%2FRequestServlet%3B%3Fprovider%3Ddemo_epa_20%26redirect%3Dtrue"
-        print("OETT: " + urlstart + tf2.text.addingPercentEncoding(withAllowedCharacters: .alphanumerics)!)
-        print("OETT neil: " + ofNeil) 
-//        ctxCompletion.setURL(url: ofNeil)
-//        context?.start(ctxCompletion)
+        ctxCompletion.setURL(url: urlstart + frm!.prepareTCTokenURL(tf2.text))
+        context?.start(ctxCompletion)
     }
 
     @IBAction func pinMgmt(_ sender: Any) {
