@@ -58,7 +58,6 @@ class ViewController: UIViewController {
                     }
 
                     enterPin.enter(pin.text)
-      
 
                 })
 
@@ -69,9 +68,7 @@ class ViewController: UIViewController {
                 // Presenting the alert
                 self.v.present(alert, animated: true, completion: nil)
             }
-
         }
-        
 
         func onPinCanRequest(_ enterPinCan: (NSObjectProtocol & ConfirmTwoPasswordsOperationProtocol)!) {
             print("onPinCanRequest")
@@ -150,8 +147,31 @@ class ViewController: UIViewController {
         }
         
         func onServerData(_ data: (NSObjectProtocol & ServerDataProtocol)!, withTransactionData transactionData: String!, withSelectReadWrite selectReadWrite: (NSObjectProtocol & ConfirmAttributeSelectionOperationProtocol)!) {
-    ///        msgHandler?.setText("Allowing attributes automatically")
-            selectReadWrite.enter(data as? [NSObjectProtocol & SelectableItemProtocol], withWrite: nil)
+            print("onServerData")
+
+            var msg = ""
+            for itm in data.getReadAccessAttributes(){
+                msg += itm.getText() + ", "
+            }
+
+            DispatchQueue.main.async{
+
+                let alert = UIAlertController(title: "Allow acces for", message: msg, preferredStyle: .alert)
+                //the cancel action doing nothing
+                let cancelAction = UIAlertAction(title: "Cancel", style: .destructive)
+
+                //the confirm action taking the inputs
+                let acceptAction = UIAlertAction(title: "Allow", style: .default, handler: { [weak alert] (_) in
+                    selectReadWrite.enter(data as? [NSObjectProtocol & SelectableItemProtocol], withWrite: nil)
+                })
+
+                //adding the actions to alertController
+                alert.addAction(acceptAction)
+                alert.addAction(cancelAction)
+
+                // Presenting the alert
+                self.v.present(alert, animated: true, completion: nil)
+            }
         }
         
         func onCardAuthenticationSuccessful() {
@@ -175,9 +195,6 @@ class ViewController: UIViewController {
         func onCardInteractionComplete() {
             self.msgHandler?.setText("Card can soon be removed")
             print("onCardInteractionComplete")
-        }
-        func onTransactionInfo(_ data: String!) {
-            print("onTransactionInfo");
         }
         
         func onCardRemoved() {
@@ -275,7 +292,7 @@ class ViewController: UIViewController {
     
     func ini(){
         print("Creating the context");
-        var        context = frm?.context("Please provide card", withDefaultNFCCardRecognizedMessage: "Found card")
+        var context = frm?.context("Please provide card", withDefaultNFCCardRecognizedMessage: "Found card")
         context?.start(ctxCompletion)
         let urlstart = "http://localhost/eID-Client?tcTokenURL="
         ctxCompletion.setFrm(frm: frm!)
