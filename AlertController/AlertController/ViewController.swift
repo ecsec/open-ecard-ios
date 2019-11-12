@@ -30,6 +30,8 @@ class ViewController: UIViewController {
             print("requestCardInsertion without handler ")
         }
         func requestCardInsertion(_ msgHandler: (NSObjectProtocol & NFCOverlayMessageHandlerProtocol)!) {
+            self.msgHandler = msgHandler
+            msgHandler.setText("Please provide the card now")
             print("requestCardInsertion with handler ")
         }
         
@@ -153,10 +155,12 @@ class ViewController: UIViewController {
         }
         
         func onCardAuthenticationSuccessful() {
+            self.msgHandler?.setText("Authentication to card successful")
             print("onCardAuthenticationSuccessful")
         }
         
         func onCardRecognized() {
+            self.msgHandler?.setText("Card was detected")
             print("on card recognized the wrong one")
         }
       
@@ -169,6 +173,7 @@ class ViewController: UIViewController {
         }
         
         func onCardInteractionComplete() {
+            self.msgHandler?.setText("Card can soon be removed")
             print("onCardInteractionComplete")
         }
         func onTransactionInfo(_ data: String!) {
