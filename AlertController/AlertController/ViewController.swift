@@ -209,12 +209,15 @@ class ViewController: UIViewController {
         func onAuthenticationCompletion(_ result: (NSObjectProtocol & ActivationResultProtocol)!) {
             print("onAuthenticationCompletion", result);        
 
+            if(result.getCode()==ActivationResultCode.REDIRECT){
             let url = URL(string: result.getRedirectUrl() as! String)!
             var request = URLRequest(url: url)
             request.httpMethod = "GET" 
             NSURLConnection.sendAsynchronousRequest(request, queue: OperationQueue.main) {(response, data, error) in
                 guard let data = data else { return }
                 print(String(data: data, encoding: .utf8)!)
+                }
+            
             }
         }
         
