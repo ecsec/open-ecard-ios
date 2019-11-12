@@ -249,9 +249,7 @@ class ViewController: UIViewController {
         super.didReceiveMemoryWarning()
     }
 
-    @IBOutlet weak var tf2: UITextView!
-    
-    @IBAction func defaultHandler(_ sender: UIButton) {
+    func performEAC(){
         print("Creating the context");
         let urlstart = "http://localhost/eID-Client?tcTokenURL="
         let context = frm?.context("Please provide card", withDefaultNFCCardRecognizedMessage: "Found card")
@@ -259,6 +257,13 @@ class ViewController: UIViewController {
         ctxCompletion.setViewCtrl(v:self)
         ctxCompletion.setURL(url: urlstart + frm!.prepareTCTokenURL(tf2.text))
         context?.start(ctxCompletion)
+
+    }
+
+    @IBOutlet weak var tf2: UITextView!
+    
+    @IBAction func defaultHandler(_ sender: UIButton) {
+        performEAC()
     }
 
     @IBAction func pinMgmt(_ sender: Any) {
