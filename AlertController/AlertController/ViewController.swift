@@ -239,8 +239,9 @@ class ViewController: UIViewController {
         let serviceURL_1 = "https://test.governikus-eid.de:443/Autent-DemoApplication/RequestServlet;?provider=demo_epa_20&redirect=true";
 	    let serviceURL_2 = "https://test.governikus-eid.de:443/Autent-DemoApplication/RequestServlet;?provider=demo_epa_can&redirect=true";
       	let serviceURL_3 = "https://service.dev.skidentity.de:443/tctoken";
+        let serviceURL_4 = "http://127.0.0.1:24727/eID-Client?cardTypes=http%3A%2F%2Fbsi.bund.de%2Fcif%2Fnpa.xml&tcTokenURL=https%3A%2F%2Fservice.skidentity-test.de%2Fbackend%2Ftr03130%2Factivate-client%3Fsession%3DdLNNLJ7Oy7BEXnnOciqvzw%26type%3Dhttp%253A%252F%252Fbsi.bund.de%252Fcif%252Fnpa.xml%26protocol%3Durn%253Aoid%253A1.3.162.15480.3.0.14%26activation-type%3DeID-Client"
 
-        tf2.text = serviceURL_1
+        tf2.text = serviceURL_4
     }
 
     override func didReceiveMemoryWarning() {
