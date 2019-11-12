@@ -27,15 +27,10 @@ class ViewController: UIViewController {
         
         
         func requestCardInsertion() {
-            //not used
+            print("requestCardInsertion without handler ")
         }
         func requestCardInsertion(_ msgHandler: (NSObjectProtocol & NFCOverlayMessageHandlerProtocol)!) {
-            print("requestCardInsertion b ")
-//            msgHandler.setText("Du die Kadde her!")
-            
-            DispatchQueue.global().async {
-                self.frm.triggerNFC()
-            }
+            print("requestCardInsertion with handler ")
         }
         
         func onPinRequest(_ attempt: Int32, withEnterPin enterPin: (NSObjectProtocol & ConfirmPasswordOperationProtocol)!) {
@@ -243,12 +238,15 @@ class ViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
 
-        //	private static final String DEFAULT_TC_TOKEN_URL = "https://test.governikus-eid.de:443/Autent-DemoApplication/RequestServlet;?provider=demo_epa_20&redirect=true";
-	    //  private static final String DEFAULT_TC_TOKEN_URL = "https://test.governikus-eid.de:443/Autent-DemoApplication/RequestServlet;?provider=demo_epa_can&redirect=true";
-        //	private static final String DEFAULT_TC_TOKEN_URL = "https://service.dev.skidentity.de:443/tctoken";
-        let serviceURL = "https://service.dev.skidentity.de:443/tctoken";
-     //   tf2.setText(urlstart + serviceURL)
-        tf2.text = serviceURL
+        let serviceURL_1 = "https://test.governikus-eid.de:443/Autent-DemoApplication/RequestServlet;?provider=demo_epa_20&redirect=true";
+	    let serviceURL_2 = "https://test.governikus-eid.de:443/Autent-DemoApplication/RequestServlet;?provider=demo_epa_can&redirect=true";
+      	let serviceURL_3 = "https://service.dev.skidentity.de:443/tctoken";
+
+        tf2.text = serviceURL_1
+
+        let ofNeil = "https%3A%2F%2Ftest.governikus-eid.de%3A443%2FAutent-DemoApplication%2FRequestServlet%3B%3Fprovider%3Ddemo_epa_20%26redirect%3Dtrue"
+        print("OETT: " + tf2.text.addingPercentEncoding(withAllowedCharacters: .urlUserAllowed)!)
+        print("OETT neil: " + ofNeil) 
     }
 
     override func didReceiveMemoryWarning() {
@@ -263,8 +261,12 @@ class ViewController: UIViewController {
         let context = frm?.context("Please provide card", withDefaultNFCCardRecognizedMessage: "Found card")
         ctxCompletion.setFrm(frm: frm!)
         ctxCompletion.setViewCtrl(v:self)
-        ctxCompletion.setURL(url: urlstart + tf2.text.addingPercentEncoding(withAllowedCharacters: .urlHostAllowed)!)
-        context?.start(ctxCompletion)
+
+        let ofNeil = "http://localhost/eID-Client?tcTokenURL=https%3A%2F%2Ftest.governikus-eid.de%3A443%2FAutent-DemoApplication%2FRequestServlet%3B%3Fprovider%3Ddemo_epa_20%26redirect%3Dtrue"
+        print("OETT: " + urlstart + tf2.text.addingPercentEncoding(withAllowedCharacters: .alphanumerics)!)
+        print("OETT neil: " + ofNeil) 
+//        ctxCompletion.setURL(url: ofNeil)
+//        context?.start(ctxCompletion)
     }
 
     @IBAction func pinMgmt(_ sender: Any) {
