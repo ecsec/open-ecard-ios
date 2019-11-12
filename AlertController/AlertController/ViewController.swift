@@ -55,9 +55,8 @@ class ViewController: UIViewController {
                         return
                     }
 
-                    DispatchQueue.global(qos: .background).async{
-                        enterPin.enter(pin.text)
-                    }
+                    enterPin.enter(pin.text)
+      
 
                 })
 
@@ -97,9 +96,8 @@ class ViewController: UIViewController {
                         return
                     }
 
-                    DispatchQueue.global(qos: .background).async{
-                        enterPinCan.enter(pin.text, withSecondPassword: can.text)
-                    }
+                    enterPinCan.enter(pin.text, withSecondPassword: can.text)
+                    
 
                 })
 
@@ -134,9 +132,9 @@ class ViewController: UIViewController {
                         return
                     }
 
-                    DispatchQueue.global(qos: .background).async{
-                        enterCan.enter(can.text)
-                    }
+                   
+                    enterCan.enter(can.text)
+                    
 
                 })
 
@@ -192,43 +190,7 @@ class ViewController: UIViewController {
         
         
     }
-
-    func showDialog(){
-             DispatchQueue.main.async{
-
-                let alert = UIAlertController(title: "Enter can", message: "", preferredStyle: .alert)
-                           //Add the text field. You can configure it however you need.
-                alert.addTextField { (can) in
-                    can.placeholder = "can"
-                    can.isSecureTextEntry = true
-                }
-
-                //the cancel action doing nothing
-                let cancelAction = UIAlertAction(title: "Cancel", style: .destructive)
-
-                //the confirm action taking the inputs
-                let acceptAction = UIAlertAction(title: "Enter", style: .default, handler: { [weak alert] (_) in
-                    guard let can = alert?.textFields?[0] else {
-                        print("Issue with Alert TextFields")
-                        return
-                    }
-
-                    DispatchQueue.global(qos: .background).async{
-                        enterCan.enter(can.text)
-                    }
-
-                })
-
-                //adding the actions to alertController
-                alert.addAction(acceptAction)
-                alert.addAction(cancelAction)
-
-                // Presenting the alert
-                self.present(alert, animated: true, completion: nil)
-            }
-
-    }
-    
+   
     class ContextCompletion: NSObject, StartServiceHandlerProtocol {
         var frm : OpenEcardProtocol? = nil;
         var eacFactory : EacControllerFactoryProtocol? = nil;
