@@ -13,7 +13,6 @@ import OpenEcard.open_ecard_mobile_lib
 
 class ViewController: UIViewController {
     class PinMgmtControllerStart: NSObject, ControllerCallbackProtocol, PinManagementInteractionProtocol{
-
         let frm : OpenEcardProtocol;
         var msgHandler : NFCOverlayMessageHandlerProtocol?;
         var v :ViewController
@@ -28,50 +27,129 @@ class ViewController: UIViewController {
 
         func onPinChangeable(_ attempts: Int32, withEnterOldNewPins enterOldNewPins: (NSObjectProtocol & ConfirmOldSetNewPasswordOperationProtocol)!) {
             print("onPinChangeable");
+            DispatchQueue.main.async{
+
+                let alert = UIAlertController(title: "Enter old and new pin", message: "", preferredStyle: .alert)
+                           //Add the text field. You can configure it however you need.
+                alert.addTextField { (pin) in
+                    pin.placeholder = "pin"
+                    pin.isSecureTextEntry = true
+                }
+                alert.addTextField { (npin) in
+                    npin.placeholder = "new pin"
+                    npin.isSecureTextEntry = true
+                }
+                alert.addTextField { (cnpin) in
+                    cnpin.placeholder = "confirm new pin"
+                    cnpin.isSecureTextEntry = true
+                }
+
+                //the cancel action doing nothing
+                let cancelAction = UIAlertAction(title: "Cancel", style: .destructive)
+
+                //the confirm action taking the inputs
+                let acceptAction = UIAlertAction(title: "Enter", style: .default, handler: { [weak alert] (_) in
+                    guard let pin = alert?.textFields?[0], let npin = alert?.textFields?[1], let cnpin = alert?.textFields?[2] else {
+                        print("Issue with Alert TextFields")
+                        return
+                    }
+
+                    if(npin.text == cnpin.text){
+                        enterOldNewPins.enter(pin.text, withNewPassword: npin.text)
+                    }else{
+                        print("new pin and confirmation not equal")
+                    }
+                    
+
+                })
+
+                //adding the actions to alertController
+                alert.addAction(acceptAction)
+                alert.addAction(cancelAction)
+
+                // Presenting the alert
+                self.v.present(alert, animated: true, completion: nil)
+            }
+
         }
         
         func onCanRequired(_ enterCan: (NSObjectProtocol & ConfirmPasswordOperationProtocol)!) {
             print("onCanRequired");
+            DispatchQueue.main.async{
+
+                let alert = UIAlertController(title: "Enter can", message: "", preferredStyle: .alert)
+                           //Add the text field. You can configure it however you need.
+                alert.addTextField { (can) in
+                    can.placeholder = "can"
+                    can.isSecureTextEntry = true
+                }
+
+                //the cancel action doing nothing
+                let cancelAction = UIAlertAction(title: "Cancel", style: .destructive)
+
+                //the confirm action taking the inputs
+                let acceptAction = UIAlertAction(title: "Enter", style: .default, handler: { [weak alert] (_) in
+                    guard let can = alert?.textFields?[1] else {
+                        print("Issue with Alert TextFields")
+                        return
+                    }
+
+                    enterCan.enter(can.text)
+                    
+
+                })
+
+                //adding the actions to alertController
+                alert.addAction(acceptAction)
+                alert.addAction(cancelAction)
+
+                // Presenting the alert
+                self.v.present(alert, animated: true, completion: nil)
+            }
+
         }
         
         func onPinBlocked(_ unblockWithPuk: (NSObjectProtocol & ConfirmPasswordOperationProtocol)!) {
             print("onPinBlocked");
+            DispatchQueue.main.async{
+
+                let alert = UIAlertController(title: "Enter puk", message: "", preferredStyle: .alert)
+                           //Add the text field. You puk configure it however you need.
+                alert.addTextField { (puk) in
+                    puk.placeholder = "puk"
+                    puk.isSecureTextEntry = true
+                }
+
+                //the cancel action doing nothing
+                let cancelAction = UIAlertAction(title: "Cancel", style: .destructive)
+
+                //the confirm action taking the inputs
+                let acceptAction = UIAlertAction(title: "Enter", style: .default, handler: { [weak alert] (_) in
+                    guard let puk = alert?.textFields?[1] else {
+                        print("Issue with Alert TextFields")
+                        return
+                    }
+
+                    unblockWithPuk.enter(puk.text)
+                    
+
+                })
+
+                //adding the actions to alertController
+                alert.addAction(acceptAction)
+                alert.addAction(cancelAction)
+
+                // Presenting the alert
+                self.v.present(alert, animated: true, completion: nil)
+            }
         }
-        
+       
         func onStarted() {
             print("onStarted");
         }
         
         func onAuthenticationCompletion(_ result: (NSObjectProtocol & ActivationResultProtocol)!) {
             print("onAuthenticationCompletion");
-        }
-        
-        func onCanRequest(_ enterCan: (NSObjectProtocol & ConfirmPasswordOperationProtocol)!) {
-            print("onCanRequest");
-        }
-        
-        func onPinRequest(_ attempt: Int32, withEnterPin enterPin: (NSObjectProtocol & ConfirmPasswordOperationProtocol)!) {
-            print("onPinRequest");
-        }
-        
-        func onPinCanRequest(_ enterPinCan: (NSObjectProtocol & ConfirmTwoPasswordsOperationProtocol)!) {
-            print("onPinCanRequest");
-        }
-        
-        func onCardBlocked() {
-            print("onCardBlocked");
-        }
-        
-        func onCardDeactivated() {
-            print("onCardDeactivated");
-        }
-        
-        func onServerData(_ data: (NSObjectProtocol & ServerDataProtocol)!, withTransactionData transactionData: String!, withSelectReadWrite selectReadWrite: (NSObjectProtocol & ConfirmAttributeSelectionOperationProtocol)!) {
-            print("onServerData");
-        }
-        
-        func onCardAuthenticationSuccessful() {
-            print("onCardAuthenticationSuccessful");
         }
         
         func requestCardInsertion() {
@@ -127,7 +205,7 @@ class ViewController: UIViewController {
                 let alert = UIAlertController(title: "Enter pin", message: "", preferredStyle: .alert)
                            //Add the text field. You can configure it however you need.
                 alert.addTextField { (pin) in
-                    pin.placeholder = "pin/can"
+                    pin.placeholder = "pin"
                     pin.isSecureTextEntry = true
                 }
 
