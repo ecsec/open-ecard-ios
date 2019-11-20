@@ -12,6 +12,90 @@ import OpenEcard
 import OpenEcard.open_ecard_mobile_lib
 
 class ViewController: UIViewController {
+    class PinMgmtControllerStart: NSObject, ControllerCallbackProtocol, PinManagementInteractionProtocol{
+
+        let frm : OpenEcardProtocol;
+        var msgHandler : NFCOverlayMessageHandlerProtocol?;
+        var v :ViewController
+
+        init(frm : OpenEcardProtocol, v:ViewController) {
+            self.v = v
+            self.frm = frm
+            self.msgHandler = nil
+            super.init()
+        }
+
+
+        func onPinChangeable(_ attempts: Int32, withEnterOldNewPins enterOldNewPins: (NSObjectProtocol & ConfirmOldSetNewPasswordOperationProtocol)!) {
+            print("onPinChangeable");
+        }
+        
+        func onCanRequired(_ enterCan: (NSObjectProtocol & ConfirmPasswordOperationProtocol)!) {
+            print("onCanRequired");
+        }
+        
+        func onPinBlocked(_ unblockWithPuk: (NSObjectProtocol & ConfirmPasswordOperationProtocol)!) {
+            print("onPinBlocked");
+        }
+        
+        func onStarted() {
+            print("onStarted");
+        }
+        
+        func onAuthenticationCompletion(_ result: (NSObjectProtocol & ActivationResultProtocol)!) {
+            print("onAuthenticationCompletion");
+        }
+        
+        func onCanRequest(_ enterCan: (NSObjectProtocol & ConfirmPasswordOperationProtocol)!) {
+            print("onCanRequest");
+        }
+        
+        func onPinRequest(_ attempt: Int32, withEnterPin enterPin: (NSObjectProtocol & ConfirmPasswordOperationProtocol)!) {
+            print("onPinRequest");
+        }
+        
+        func onPinCanRequest(_ enterPinCan: (NSObjectProtocol & ConfirmTwoPasswordsOperationProtocol)!) {
+            print("onPinCanRequest");
+        }
+        
+        func onCardBlocked() {
+            print("onCardBlocked");
+        }
+        
+        func onCardDeactivated() {
+            print("onCardDeactivated");
+        }
+        
+        func onServerData(_ data: (NSObjectProtocol & ServerDataProtocol)!, withTransactionData transactionData: String!, withSelectReadWrite selectReadWrite: (NSObjectProtocol & ConfirmAttributeSelectionOperationProtocol)!) {
+            print("onServerData");
+        }
+        
+        func onCardAuthenticationSuccessful() {
+            print("onCardAuthenticationSuccessful");
+        }
+        
+        func requestCardInsertion() {
+            print("requestCardInsertion");
+        }
+        
+        func requestCardInsertion(_ msgHandler: (NSObjectProtocol & NFCOverlayMessageHandlerProtocol)!) {
+            print("requestCardInsertion");
+        }
+        
+        func onCardInteractionComplete() {
+            print("onCardInteractionComplete");
+        }
+        
+        func onCardRecognized() {
+            print("onCardRecognized");
+        }
+        
+        func onCardRemoved() {
+            print("onCardRemoved");
+        }
+        
+                
+    }
     
     class EacControllerStart: NSObject, ControllerCallbackProtocol, EacInteractionProtocol {
         let frm : OpenEcardProtocol;
@@ -227,7 +311,9 @@ class ViewController: UIViewController {
     class ContextCompletion: NSObject, StartServiceHandlerProtocol {
         var frm : OpenEcardProtocol? = nil;
         var eacFactory : EacControllerFactoryProtocol? = nil;
+        var pinMgmtFactory : PinManagementControllerFactoryProtocol? = nil;
         var currentEacActivation: EacControllerStart? = nil;
+        var currentPinMgmtActivation: PinMgmtControllerStart? = nil;
         var currentController: ActivationControllerProtocol? = nil;
         var v: ViewController?
         var url : String?
@@ -250,7 +336,10 @@ class ViewController: UIViewController {
             print("Context process completed successfully.")
             
             self.eacFactory = source.eacFactory();
+            self.pinMgmtFactory = source.pinManagementFactory();
+
             self.currentEacActivation = EacControllerStart(frm: frm!, v:v!);
+            self.currentPinMgmtActivation = PinMgmtControllerStart(frm: frm!, v:v!);
             self.ready = true
 
             
@@ -262,7 +351,12 @@ class ViewController: UIViewController {
             }
         }
            
-
+        func performPINMgmt(){
+            if(self.ready){
+                self.currentController = self.pinMgmtFactory?.create(currentPinMgmtActivation, with: currentPinMgmtActivation); 
+            }
+        }
+         
         func onFailure(_ response: (NSObjectProtocol & ServiceErrorResponseProtocol)!) {
             print("Context process completed successfully.")
             self.ready = false 
@@ -310,5 +404,6 @@ class ViewController: UIViewController {
     }
 
     @IBAction func pinMgmt(_ sender: Any) {
+        ctxCompletion.performPINMgmt()
     }
 }
