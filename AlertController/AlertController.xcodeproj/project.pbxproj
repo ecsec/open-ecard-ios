@@ -13,7 +13,6 @@
 		6C702FCF20D7DA0E000083E1 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6C702FCE20D7DA0E000083E1 /* AppDelegate.swift */; };
 		6C702FD120D7DA0E000083E1 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6C702FD020D7DA0E000083E1 /* ViewController.swift */; };
 		6C702FD620D7DA0E000083E1 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 6C702FD520D7DA0E000083E1 /* Assets.xcassets */; };
-		6C702FD920D7DA0E000083E1 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 6C702FD720D7DA0E000083E1 /* LaunchScreen.storyboard */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXCopyFilesBuildPhase section */
@@ -39,7 +38,6 @@
 		6C702FD020D7DA0E000083E1 /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
 		6C702FD320D7DA0E000083E1 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		6C702FD520D7DA0E000083E1 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
-		6C702FD820D7DA0E000083E1 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		6C702FDA20D7DA0E000083E1 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -80,7 +78,6 @@
 				6C702FD020D7DA0E000083E1 /* ViewController.swift */,
 				6C702FD220D7DA0E000083E1 /* Main.storyboard */,
 				6C702FD520D7DA0E000083E1 /* Assets.xcassets */,
-				6C702FD720D7DA0E000083E1 /* LaunchScreen.storyboard */,
 				6C702FDA20D7DA0E000083E1 /* Info.plist */,
 			);
 			path = AlertController;
@@ -147,7 +144,6 @@
 			buildActionMask = 2147483647;
 			files = (
 				2ED1F19D23224C5F0054B632 /* Main.storyboard in Resources */,
-				6C702FD920D7DA0E000083E1 /* LaunchScreen.storyboard in Resources */,
 				6C702FD620D7DA0E000083E1 /* Assets.xcassets in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -174,14 +170,6 @@
 				2ED1F19F23224C600054B632 /* en */,
 			);
 			name = Main.storyboard;
-			sourceTree = "<group>";
-		};
-		6C702FD720D7DA0E000083E1 /* LaunchScreen.storyboard */ = {
-			isa = PBXVariantGroup;
-			children = (
-				6C702FD820D7DA0E000083E1 /* Base */,
-			);
-			name = LaunchScreen.storyboard;
 			sourceTree = "<group>";
 		};
 /* End PBXVariantGroup section */
