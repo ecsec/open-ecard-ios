@@ -13,6 +13,7 @@ import OpenEcard.open_ecard_mobile_lib
 
 class ViewController: UIViewController {
     class PinMgmtControllerStart: NSObject, ControllerCallbackProtocol, PinManagementInteractionProtocol{
+        
         let frm : OpenEcardProtocol;
         var msgHandler : NFCOverlayMessageHandlerProtocol?;
         var v :ViewController
@@ -73,12 +74,16 @@ class ViewController: UIViewController {
 
         }
         
-        func onCanRequired(_ enterCan: (NSObjectProtocol & ConfirmPasswordOperationProtocol)!) {
-            print("onCanRequired");
+        func onPinCanRequired(_ enterPinCan: (NSObjectProtocol & ConfirmPinCanOperationProtocol)!) {
+            print("onPinCanRequest")
             DispatchQueue.main.async{
 
-                let alert = UIAlertController(title: "Enter can", message: "", preferredStyle: .alert)
+                let alert = UIAlertController(title: "Enter pin/can", message: "", preferredStyle: .alert)
                            //Add the text field. You can configure it however you need.
+                alert.addTextField { (pin) in
+                    pin.placeholder = "pin"
+                    pin.isSecureTextEntry = true
+                }
                 alert.addTextField { (can) in
                     can.placeholder = "can"
                     can.isSecureTextEntry = true
@@ -89,12 +94,12 @@ class ViewController: UIViewController {
 
                 //the confirm action taking the inputs
                 let acceptAction = UIAlertAction(title: "Enter", style: .default, handler: { [weak alert] (_) in
-                    guard let can = alert?.textFields?[1] else {
+                    guard let pin = alert?.textFields?[0], let can = alert?.textFields?[1] else {
                         print("Issue with Alert TextFields")
                         return
                     }
 
-                    enterCan.enter(can.text)
+                    enterPinCan.enter(pin.text, withCan: can.text)
                     
 
                 })
@@ -106,7 +111,6 @@ class ViewController: UIViewController {
                 // Presenting the alert
                 self.v.present(alert, animated: true, completion: nil)
             }
-
         }
         
         func onPinBlocked(_ unblockWithPuk: (NSObjectProtocol & ConfirmPasswordOperationProtocol)!) {
@@ -232,7 +236,7 @@ class ViewController: UIViewController {
             }
         }
 
-        func onPinCanRequest(_ enterPinCan: (NSObjectProtocol & ConfirmTwoPasswordsOperationProtocol)!) {
+        func onPinCanRequest(_ enterPinCan: (NSObjectProtocol & ConfirmPinCanOperationProtocol)!) {
             print("onPinCanRequest")
             DispatchQueue.main.async{
 
@@ -257,7 +261,7 @@ class ViewController: UIViewController {
                         return
                     }
 
-                    enterPinCan.enter(pin.text, withSecondPassword: can.text)
+                    enterPinCan.enter(pin.text , withCan: can.text)
                     
 
                 })
