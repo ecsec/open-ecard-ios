@@ -13,6 +13,14 @@ import OpenEcard.open_ecard_mobile_lib
 
 class ViewController: UIViewController {
     class PinMgmtControllerStart: NSObject, ControllerCallbackProtocol, PinManagementInteractionProtocol{
+        func onCardPukBlocked() {
+            print("cardBlocked")
+        }
+        
+        func onCardDeactivated() {
+            print("cardDeactivated")
+        }
+        
         
         let frm : OpenEcardProtocol;
         var msgHandler : NFCOverlayMessageHandlerProtocol?;
