@@ -13,6 +13,7 @@ import OpenEcard.open_ecard_mobile_lib
 
 class ViewController: UIViewController {
     class PinMgmtControllerStart: NSObject, ControllerCallbackProtocol, PinManagementInteractionProtocol{
+        
         func onCardPukBlocked() {
             print("cardBlocked")
         }
@@ -25,11 +26,13 @@ class ViewController: UIViewController {
         let frm : OpenEcardProtocol;
         var msgHandler : NFCOverlayMessageHandlerProtocol?;
         var v :ViewController
+        var ctxComp :ContextCompletion;
 
-        init(frm : OpenEcardProtocol, v:ViewController) {
+        init(frm : OpenEcardProtocol, v:ViewController, ctx: ContextCompletion) {
             self.v = v
             self.frm = frm
             self.msgHandler = nil
+            self.ctxComp = ctx
             super.init()
         }
 
@@ -54,7 +57,10 @@ class ViewController: UIViewController {
                 }
 
                 //the cancel action doing nothing
-                let cancelAction = UIAlertAction(title: "Cancel", style: .destructive)
+                let cancelAction = UIAlertAction(title: "Cancel", style: .destructive, handler: {[weak alert] (_) in 
+                    print("cancelling")
+                    self.ctxComp.cancelActivation()
+                })
 
                 //the confirm action taking the inputs
                 let acceptAction = UIAlertAction(title: "Enter", style: .default, handler: { [weak alert] (_) in
@@ -82,11 +88,11 @@ class ViewController: UIViewController {
 
         }
         
-        func onPinCanRequired(_ enterPinCan: (NSObjectProtocol & ConfirmPinCanOperationProtocol)!) {
-            print("onPinCanRequest")
+        func onPinCanNewPinRequired(_ enterPinCanNewPin: (NSObjectProtocol & ConfirmPinCanNewPinOperationProtocol)!) {
+            print("onPinCanNewPinRequired")
             DispatchQueue.main.async{
 
-                let alert = UIAlertController(title: "Enter pin/can", message: "", preferredStyle: .alert)
+                let alert = UIAlertController(title: "Enter current pin/can/new pin", message: "", preferredStyle: .alert)
                            //Add the text field. You can configure it however you need.
                 alert.addTextField { (pin) in
                     pin.placeholder = "pin"
@@ -96,19 +102,35 @@ class ViewController: UIViewController {
                     can.placeholder = "can"
                     can.isSecureTextEntry = true
                 }
+                alert.addTextField { (newPin) in
+                    newPin.placeholder = "new pin"
+                    newPin.isSecureTextEntry = true
+                }
+                alert.addTextField { (cnpin) in
+                    cnpin.placeholder = "confirm new pin"
+                    cnpin.isSecureTextEntry = true
+                }
+
+
 
                 //the cancel action doing nothing
-                let cancelAction = UIAlertAction(title: "Cancel", style: .destructive)
-
+                let cancelAction = UIAlertAction(title: "Cancel", style: .destructive, handler: {[weak alert] (_) in 
+                    print("cancelling")
+                    self.ctxComp.cancelActivation()
+                })
                 //the confirm action taking the inputs
                 let acceptAction = UIAlertAction(title: "Enter", style: .default, handler: { [weak alert] (_) in
-                    guard let pin = alert?.textFields?[0], let can = alert?.textFields?[1] else {
+                    guard let pin = alert?.textFields?[0], let can = alert?.textFields?[1], let newPin = alert?.textFields?[2], let cnpin = alert?.textFields?[3] else {
                         print("Issue with Alert TextFields")
                         return
                     }
 
-                    enterPinCan.enter(pin.text, withCan: can.text)
-                    
+                    if(newPin.text == cnpin.text){
+                        enterPinCanNewPin.enter(pin.text, withCan: can.text, withNewPin: newPin.text)
+                    }else{
+                        print("new pin and confirmation not equal")
+                    }
+    
 
                 })
 
@@ -133,11 +155,13 @@ class ViewController: UIViewController {
                 }
 
                 //the cancel action doing nothing
-                let cancelAction = UIAlertAction(title: "Cancel", style: .destructive)
-
+                let cancelAction = UIAlertAction(title: "Cancel", style: .destructive, handler: {[weak alert] (_) in 
+                    print("cancelling")
+                    self.ctxComp.cancelActivation()
+                })
                 //the confirm action taking the inputs
                 let acceptAction = UIAlertAction(title: "Enter", style: .default, handler: { [weak alert] (_) in
-                    guard let puk = alert?.textFields?[1] else {
+                    guard let puk = alert?.textFields?[0] else {
                         print("Issue with Alert TextFields")
                         return
                     }
@@ -191,11 +215,13 @@ class ViewController: UIViewController {
         let frm : OpenEcardProtocol;
         var msgHandler : NFCOverlayMessageHandlerProtocol?;
         var v :ViewController
+        var ctxComp : ContextCompletion
         
-        init(frm : OpenEcardProtocol, v:ViewController) {
+        init(frm : OpenEcardProtocol, v:ViewController, ctx: ContextCompletion) {
             self.v = v
             self.frm = frm
             self.msgHandler = nil
+            self.ctxComp = ctx
             super.init()
         }
         
@@ -222,8 +248,10 @@ class ViewController: UIViewController {
                 }
 
                 //the cancel action doing nothing
-                let cancelAction = UIAlertAction(title: "Cancel", style: .destructive)
-
+                let cancelAction = UIAlertAction(title: "Cancel", style: .destructive, handler: {[weak alert] (_) in 
+                    print("cancelling")
+                    self.ctxComp.cancelActivation()
+                })
                 //the confirm action taking the inputs
                 let acceptAction = UIAlertAction(title: "Enter", style: .default, handler: { [weak alert] (_) in
                     guard let pin = alert?.textFields?[0] else {
@@ -260,8 +288,10 @@ class ViewController: UIViewController {
                 }
 
                 //the cancel action doing nothing
-                let cancelAction = UIAlertAction(title: "Cancel", style: .destructive)
-
+                let cancelAction = UIAlertAction(title: "Cancel", style: .destructive, handler: {[weak alert] (_) in 
+                    print("cancelling")
+                    self.ctxComp.cancelActivation()
+                })
                 //the confirm action taking the inputs
                 let acceptAction = UIAlertAction(title: "Enter", style: .default, handler: { [weak alert] (_) in
                     guard let pin = alert?.textFields?[0], let can = alert?.textFields?[1] else {
@@ -296,7 +326,10 @@ class ViewController: UIViewController {
                 }
 
                 //the cancel action doing nothing
-                let cancelAction = UIAlertAction(title: "Cancel", style: .destructive)
+                let cancelAction = UIAlertAction(title: "Cancel", style: .destructive, handler: {[weak alert] (_) in 
+                    print("cancelling")
+                    self.ctxComp.cancelActivation()
+                })
 
                 //the confirm action taking the inputs
                 let acceptAction = UIAlertAction(title: "Enter", style: .default, handler: { [weak alert] (_) in
@@ -441,11 +474,15 @@ class ViewController: UIViewController {
             self.eacFactory = source.eacFactory();
             self.pinMgmtFactory = source.pinManagementFactory();
 
-            self.currentEacActivation = EacControllerStart(frm: frm!, v:v!);
-            self.currentPinMgmtActivation = PinMgmtControllerStart(frm: frm!, v:v!);
+            self.currentEacActivation = EacControllerStart(frm: frm!, v:v!, ctx:self);
+            self.currentPinMgmtActivation = PinMgmtControllerStart(frm: frm!, v:v!, ctx: self);
             self.ready = true
 
             
+        }
+
+        func cancelActivation(){
+            self.currentController?.cancelAuthentication()
         }
 
         func performEAC(){
