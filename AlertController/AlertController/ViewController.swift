@@ -1,11 +1,3 @@
-//
-//  ViewController.swift
-//  AlertController
-//
-//  Created by MIHIR PIPERMITWALA on 18/06/18.
-//  Copyright © 2018 Mihir Pipermitwala. All rights reserved.
-//
-
 import UIKit
 import CoreNFC
 import OpenEcard
