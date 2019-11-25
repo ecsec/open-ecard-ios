@@ -45,15 +45,18 @@ class ViewController: UIViewController {
                            //Add the text field. You can configure it however you need.
                 alert.addTextField { (pin) in
                     pin.placeholder = "pin"
+                    pin.keyboardType = .numberPad
                     pin.isSecureTextEntry = true
                 }
                 alert.addTextField { (npin) in
                     npin.placeholder = "new pin"
+                    npin.keyboardType = .numberPad
                     npin.isSecureTextEntry = true
                 }
                 alert.addTextField { (cnpin) in
                     cnpin.placeholder = "confirm new pin"
                     cnpin.isSecureTextEntry = true
+                    cnpin.keyboardType = .numberPad
                 }
 
                 //the cancel action doing nothing
@@ -97,18 +100,22 @@ class ViewController: UIViewController {
                 alert.addTextField { (pin) in
                     pin.placeholder = "pin"
                     pin.isSecureTextEntry = true
+                    pin.keyboardType = .numberPad
                 }
                 alert.addTextField { (can) in
                     can.placeholder = "can"
                     can.isSecureTextEntry = true
+                    can.keyboardType = .numberPad
                 }
                 alert.addTextField { (newPin) in
                     newPin.placeholder = "new pin"
                     newPin.isSecureTextEntry = true
+                    newPin.keyboardType = .numberPad
                 }
                 alert.addTextField { (cnpin) in
                     cnpin.placeholder = "confirm new pin"
                     cnpin.isSecureTextEntry = true
+                    cnpin.keyboardType = .numberPad
                 }
 
 
@@ -152,6 +159,7 @@ class ViewController: UIViewController {
                 alert.addTextField { (puk) in
                     puk.placeholder = "puk"
                     puk.isSecureTextEntry = true
+                    puk.keyboardType = .numberPad
                 }
 
                 //the cancel action doing nothing
@@ -281,10 +289,12 @@ class ViewController: UIViewController {
                 alert.addTextField { (pin) in
                     pin.placeholder = "pin"
                     pin.isSecureTextEntry = true
+                    pin.keyboardType = .numberPad
                 }
                 alert.addTextField { (can) in
                     can.placeholder = "can"
                     can.isSecureTextEntry = true
+                    can.keyboardType = .numberPad
                 }
 
                 //the cancel action doing nothing
@@ -323,6 +333,7 @@ class ViewController: UIViewController {
                 alert.addTextField { (can) in
                     can.placeholder = "can"
                     can.isSecureTextEntry = true
+                    can.keyboardType = .numberPad
                 }
 
                 //the cancel action doing nothing
