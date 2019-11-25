@@ -35,10 +35,10 @@ class ViewController: UIViewController {
 
 
         func onPinChangeable(_ attempts: Int32, withEnterOldNewPins enterOldNewPins: (NSObjectProtocol & ConfirmOldSetNewPasswordOperationProtocol)!) {
-            print("onPinChangeable");
+            print("onPinChangeable. attempts: \(attempts)");
             DispatchQueue.main.async{
 
-                let alert = UIAlertController(title: "Enter old and new pin", message: "", preferredStyle: .alert)
+                let alert = UIAlertController(title: "Enter old and new pin", message: "Pin attempts remaining \(attempts)", preferredStyle: .alert)
                            //Add the text field. You can configure it however you need.
                 alert.addTextField { (pin) in
                     pin.placeholder = "pin"
