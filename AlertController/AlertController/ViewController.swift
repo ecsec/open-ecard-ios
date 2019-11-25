@@ -443,6 +443,7 @@ class ViewController: UIViewController {
             if let urlString = result.getRedirectUrl() {
             
             let url = URL(string: urlString)!
+            print("requesting url: \(urlString)")
             var request = URLRequest(url: url)
             request.httpMethod = "GET" 
             NSURLConnection.sendAsynchronousRequest(request, queue: OperationQueue.main) {(response, data, error) in
