@@ -4,7 +4,7 @@ import OpenEcard
 import WebKit
 import OpenEcard.open_ecard_mobile_lib
 
-class ViewController: UIViewController {
+class ViewController: UIViewController, WKNavigationDelegate {
     class PinMgmtControllerStart: NSObject, ControllerCallbackProtocol, PinManagementInteractionProtocol{
         
         func onCardPukBlocked() {
@@ -513,6 +513,8 @@ class ViewController: UIViewController {
         }
     }
     
+    
+    
     lazy var frm = createOpenEcard()
     var ctxCompletion = ContextCompletion()
    
@@ -520,14 +522,12 @@ class ViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
 
-        let serviceURL_1 = "https://test.governikus-eid.de:443/Autent-DemoApplication/RequestServlet;?provider=demo_epa_20&redirect=true";
-	    let serviceURL_2 = "https://test.governikus-eid.de:443/Autent-DemoApplication/RequestServlet;?provider=demo_epa_can&redirect=true";
-      	let serviceURL_3 = "https://service.dev.skidentity.de:443/tctoken";
-        let serviceURL_4 = "http://127.0.0.1:24727/eID-Client?cardTypes=http%3A%2F%2Fbsi.bund.de%2Fcif%2Fnpa.xml&tcTokenURL=https%3A%2F%2Fservice.skidentity-test.de%2Fbackend%2Ftr03130%2Factivate-client%3Fsession%3DdLNNLJ7Oy7BEXnnOciqvzw%26type%3Dhttp%253A%252F%252Fbsi.bund.de%252Fcif%252Fnpa.xml%26protocol%3Durn%253Aoid%253A1.3.162.15480.3.0.14%26activation-type%3DeID-Client"
-        let serviceURL_5 = "https://service.skidentity-test.de/backend/tr03130/activate-client?session=dLNNLJ7Oy7BEXnnOciqvzw"
 
-        tf2.text = serviceURL_3
-
+        tf2.text = "https://service.dev.skidentity.de:443";
+        
+        self.webView.navigationDelegate = self
+        self.webView.isHidden = true
+        
         ini()
     }
 
@@ -550,21 +550,35 @@ class ViewController: UIViewController {
     @IBOutlet weak var tf2: UITextView!
     
     @IBAction func defaultHandler(_ sender: UIButton) {
-        ctxCompletion.performEAC()
+        guard let url = URL(string: tf2.text) else { return }
+        let req = URLRequest(url: url)
+        self.webView.load(req)
+        self.webView.isHidden = false
     }
     @IBAction func pinMgmt(_ sender: Any) {
         ctxCompletion.performPINMgmt()
     }
     
     @IBOutlet var webView: WKWebView!
+    
+    func webView(_ webView: WKWebView, decidePolicyFor navigationAction: WKNavigationAction,
+                 decisionHandler: @escaping (WKNavigationActionPolicy) -> Void) {
 
-    @IBAction func webViewAction(_ sender: UIButton) {
-                    
-                 
-        guard let url = URL(string: "https://google.de") else { return } 
-        let req = URLRequest(url: url)
-        self.webView.load(req)
+        
+        self.webView.scrollView.zoomScale = 6
+
+        
+        if let host = navigationAction.request.url?.host {
+            if host.contains("localhost") || host.contains("127.0.0.1") {
+                ctxCompletion.setURL(url: navigationAction.request.url!.absoluteString)
+                ctxCompletion.performEAC()
+                decisionHandler(.cancel)
+                webView.isHidden = true
+                return
+            }
+
+        decisionHandler(.allow)
+        }
 
     }
-    
 }
