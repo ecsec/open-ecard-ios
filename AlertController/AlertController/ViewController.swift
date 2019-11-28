@@ -1,6 +1,7 @@
 import UIKit
 import CoreNFC
 import OpenEcard
+import WebKit
 import OpenEcard.open_ecard_mobile_lib
 
 class ViewController: UIViewController {
@@ -551,10 +552,19 @@ class ViewController: UIViewController {
     @IBAction func defaultHandler(_ sender: UIButton) {
         ctxCompletion.performEAC()
     }
-
     @IBAction func pinMgmt(_ sender: Any) {
         ctxCompletion.performPINMgmt()
     }
+    
+    @IBOutlet var webView: WKWebView!
 
+    @IBAction func webViewAction(_ sender: UIButton) {
+                    
+                 
+        guard let url = URL(string: "https://google.de") else { return } 
+        let req = URLRequest(url: url)
+        self.webView.load(req)
 
+    }
+    
 }
