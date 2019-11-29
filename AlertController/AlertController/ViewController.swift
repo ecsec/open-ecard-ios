@@ -534,8 +534,6 @@ class ViewController: UIViewController, WKNavigationDelegate {
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
     }
-
-
     
     func ini(){
         print("Creating the context");
@@ -554,6 +552,7 @@ class ViewController: UIViewController, WKNavigationDelegate {
         let req = URLRequest(url: url)
         self.webView.load(req)
         self.webView.isHidden = false
+        self.webView.scrollView.isScrollEnabled = false
     }
     @IBAction func pinMgmt(_ sender: Any) {
         ctxCompletion.performPINMgmt()
@@ -561,12 +560,20 @@ class ViewController: UIViewController, WKNavigationDelegate {
     
     @IBOutlet var webView: WKWebView!
     
+    func webView(_ webView: WKWebView, didFinish navigation: WKNavigation!){
+        var scriptContent = "var meta = document.createElement('meta');"
+        scriptContent += "meta.name='viewport';"
+        scriptContent += "meta.content='width=device-width';"
+        scriptContent += "document.getElementsByTagName('head')[0].appendChild(meta);"
+        
+        webView.evaluateJavaScript(scriptContent, completionHandler: nil)
+    }
+    
     func webView(_ webView: WKWebView, decidePolicyFor navigationAction: WKNavigationAction,
                  decisionHandler: @escaping (WKNavigationActionPolicy) -> Void) {
 
         
         self.webView.scrollView.zoomScale = 6
-
         
         if let host = navigationAction.request.url?.host {
             if host.contains("localhost") || host.contains("127.0.0.1") {
