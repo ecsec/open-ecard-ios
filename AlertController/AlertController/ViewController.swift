@@ -475,7 +475,6 @@ class ViewController: UIViewController, WKNavigationDelegate {
 
         func setURL(url: String){
             self.url = url
-
         }
         
         func onSuccess(_ source: (NSObjectProtocol & ActivationSourceProtocol)!) {
@@ -521,9 +520,9 @@ class ViewController: UIViewController, WKNavigationDelegate {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-
-
-        tf2.text = "https://service.dev.skidentity.de:443";
+        
+        tf_directEACURL.text = "https://service.dev.skidentity.de:443/tc_token";
+        tf_testServerURL.text = "https://service.dev.skidentity.de:443";
         
         self.webView.navigationDelegate = self
         self.webView.isHidden = true
@@ -542,17 +541,27 @@ class ViewController: UIViewController, WKNavigationDelegate {
         let urlstart = "http://localhost/eID-Client?tcTokenURL="
         ctxCompletion.setFrm(frm: frm!)
         ctxCompletion.setViewCtrl(v:self)
-        ctxCompletion.setURL(url: urlstart + frm!.prepareTCTokenURL(tf2.text))
+        ctxCompletion.setURL(url: urlstart + frm!.prepareTCTokenURL(tf_directEACURL.text))
     }
-
-    @IBOutlet weak var tf2: UITextView!
     
-    @IBAction func defaultHandler(_ sender: UIButton) {
-        guard let url = URL(string: tf2.text) else { return }
+    
+    @IBOutlet weak var tf_directEACURL: UITextView!
+    
+    @IBOutlet weak var tf_testServerURL: UITextView!
+
+    
+    @IBAction func eacDirectURL(_ sender: Any) {
+        ctxCompletion.performEAC()
+    }
+    
+    @IBAction func eacWithServer(_ sender: Any) {
+        guard let url = URL(string: tf_testServerURL.text) else { return }
         let req = URLRequest(url: url)
         self.webView.load(req)
         self.webView.isHidden = false
     }
+    
+    
     @IBAction func pinMgmt(_ sender: Any) {
         ctxCompletion.performPINMgmt()
     }

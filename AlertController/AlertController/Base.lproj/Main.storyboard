@@ -16,7 +16,7 @@
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" restorationIdentifier="tf_testServerURL" text="testServerURL" textAlignment="center" id="w3n-2s-CMJ" userLabel="testServerURL">
+                            <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" text="testServerURL" textAlignment="center" id="w3n-2s-CMJ" userLabel="testServerURL">
                                 <rect key="frame" x="24" y="197" width="327" height="39"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMinY="YES"/>
                                 <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
@@ -36,7 +36,7 @@
                                     <color key="titleColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 </state>
                                 <connections>
-                                    <action selector="defaultHandler:" destination="BYZ-38-t0r" eventType="touchUpInside" id="8yN-73-S54"/>
+                                    <action selector="eacWithServer:" destination="BYZ-38-t0r" eventType="touchUpInside" id="KQD-ss-aN5"/>
                                 </connections>
                             </button>
                             <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="ph4-Aq-1wB">
@@ -89,7 +89,7 @@
                                     <color key="titleColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 </state>
                                 <connections>
-                                    <action selector="defaultHandler:" destination="BYZ-38-t0r" eventType="touchUpInside" id="1uU-Q5-pkB"/>
+                                    <action selector="eacDirectURL:" destination="BYZ-38-t0r" eventType="touchUpInside" id="LRX-ej-SuN"/>
                                 </connections>
                             </button>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Direct EAC URL:" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="GMl-At-gkt">
@@ -104,7 +104,8 @@
                         <viewLayoutGuide key="safeArea" id="6Tk-OE-BBY"/>
                     </view>
                     <connections>
-                        <outlet property="tf2" destination="w3n-2s-CMJ" id="1rR-U7-5wY"/>
+                        <outlet property="tf_directEACURL" destination="ZoI-Nj-Iti" id="TCy-tG-7Lb"/>
+                        <outlet property="tf_testServerURL" destination="w3n-2s-CMJ" id="Dea-Uc-AgT"/>
                         <outlet property="webView" destination="tCD-Cp-EAm" id="OQW-61-dYN"/>
                     </connections>
                 </viewController>
