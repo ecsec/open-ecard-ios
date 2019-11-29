@@ -552,7 +552,6 @@ class ViewController: UIViewController, WKNavigationDelegate {
         let req = URLRequest(url: url)
         self.webView.load(req)
         self.webView.isHidden = false
-        self.webView.scrollView.isScrollEnabled = false
     }
     @IBAction func pinMgmt(_ sender: Any) {
         ctxCompletion.performPINMgmt()
