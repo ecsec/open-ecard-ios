@@ -240,11 +240,12 @@ class ViewController: UIViewController {
 
             DispatchQueue.main.async{
 
-                let alert = UIAlertController(title: "Enter pin", message: "", preferredStyle: .alert)
+                let alert = UIAlertController(title: "Enter pin", message:"Pin attempts remaining \(attempt)" , preferredStyle: .alert)
                            //Add the text field. You can configure it however you need.
                 alert.addTextField { (pin) in
                     pin.placeholder = "pin"
                     pin.isSecureTextEntry = true
+                    pin.keyboardType = .numberPad
                 }
 
                 //the cancel action doing nothing
