@@ -526,6 +526,10 @@ class ViewController: UIViewController, WKNavigationDelegate {
         
         self.webView.navigationDelegate = self
         self.webView.isHidden = true
+
+
+        self.tf_directEACURL.backgroundColor = UIColor.init(displayP3Red: 1, green: 1, blue: 1, alpha: 1)
+        self.tf_testServerURL.backgroundColor = UIColor.init(displayP3Red: 1, green: 1, blue: 1, alpha: 1)
         
         ini()
     }
