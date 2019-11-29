@@ -446,7 +446,7 @@ class ViewController: UIViewController, WKNavigationDelegate {
                 }
             }else
             {
-                print("no url")
+                print("Completeted with no RedirectURL")
             }
             
         }
