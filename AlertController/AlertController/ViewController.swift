@@ -521,7 +521,7 @@ class ViewController: UIViewController, WKNavigationDelegate {
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        tf_directEACURL.text = "https://service.dev.skidentity.de:443/tc_token";
+        tf_directEACURL.text = "https://service.dev.skidentity.de:443/tctoken";
         tf_testServerURL.text = "https://service.dev.skidentity.de:443";
         
         self.webView.navigationDelegate = self
