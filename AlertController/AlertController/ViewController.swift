@@ -457,7 +457,7 @@ class ViewController: UIViewController, WKNavigationDelegate {
                 print("requesting url: \(urlString)")
                 var request = URLRequest(url: url)
                     self.v.webView.load(request)
-                    self.v.webView.isHidden = false
+                    self.v.webView.isHidden = true 
                 }
             }
         }
