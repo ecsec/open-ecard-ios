@@ -33,7 +33,7 @@
 		2EA0F62D237A289700B63BA3 /* OpenEcard.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = OpenEcard.framework; path = "../../open-ecard/packager/ios-framework/target/robovm/OpenEcard.framework"; sourceTree = "<group>"; };
 		2ED1F19F23224C600054B632 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/Main.strings; sourceTree = "<group>"; };
 		2ED1F1A5232251A00054B632 /* AlertController.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = AlertController.entitlements; sourceTree = "<group>"; };
-		6C702FCB20D7DA0E000083E1 /* AlertController.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = AlertController.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		6C702FCB20D7DA0E000083E1 /* iOS_OeC_testApp.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = iOS_OeC_testApp.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		6C702FCE20D7DA0E000083E1 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		6C702FD020D7DA0E000083E1 /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
 		6C702FD320D7DA0E000083E1 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
@@ -65,7 +65,7 @@
 		6C702FCC20D7DA0E000083E1 /* Products */ = {
 			isa = PBXGroup;
 			children = (
-				6C702FCB20D7DA0E000083E1 /* AlertController.app */,
+				6C702FCB20D7DA0E000083E1 /* iOS_OeC_testApp.app */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -86,9 +86,9 @@
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
-		6C702FCA20D7DA0E000083E1 /* AlertController */ = {
+		6C702FCA20D7DA0E000083E1 /* iOS_OeC_testApp */ = {
 			isa = PBXNativeTarget;
-			buildConfigurationList = 6C702FDD20D7DA0E000083E1 /* Build configuration list for PBXNativeTarget "AlertController" */;
+			buildConfigurationList = 6C702FDD20D7DA0E000083E1 /* Build configuration list for PBXNativeTarget "iOS_OeC_testApp" */;
 			buildPhases = (
 				6C702FC720D7DA0E000083E1 /* Sources */,
 				6C702FC820D7DA0E000083E1 /* Frameworks */,
@@ -99,9 +99,9 @@
 			);
 			dependencies = (
 			);
-			name = AlertController;
+			name = iOS_OeC_testApp;
 			productName = AlertController;
-			productReference = 6C702FCB20D7DA0E000083E1 /* AlertController.app */;
+			productReference = 6C702FCB20D7DA0E000083E1 /* iOS_OeC_testApp.app */;
 			productType = "com.apple.product-type.application";
 		};
 /* End PBXNativeTarget section */
@@ -120,7 +120,7 @@
 					};
 				};
 			};
-			buildConfigurationList = 6C702FC620D7DA0E000083E1 /* Build configuration list for PBXProject "AlertController" */;
+			buildConfigurationList = 6C702FC620D7DA0E000083E1 /* Build configuration list for PBXProject "iOS_OeC_testApp" */;
 			compatibilityVersion = "Xcode 8.0";
 			developmentRegion = en;
 			hasScannedForEncodings = 0;
@@ -133,7 +133,7 @@
 			projectDirPath = "";
 			projectRoot = "";
 			targets = (
-				6C702FCA20D7DA0E000083E1 /* AlertController */,
+				6C702FCA20D7DA0E000083E1 /* iOS_OeC_testApp */,
 			);
 		};
 /* End PBXProject section */
@@ -320,8 +320,8 @@
 				INFOPLIST_FILE = AlertController/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 13.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
-				PRODUCT_BUNDLE_IDENTIFIER = de.ecsec.AlertController;
-				PRODUCT_NAME = "$(TARGET_NAME)";
+				PRODUCT_BUNDLE_IDENTIFIER = "de.ecsec.iOS-OeC-testApp";
+				PRODUCT_NAME = iOS_OeC_testApp;
 				PROVISIONING_PROFILE_SPECIFIER = "";
 				SWIFT_VERSION = 4.0;
 				TARGETED_DEVICE_FAMILY = 1;
@@ -344,8 +344,8 @@
 				INFOPLIST_FILE = AlertController/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 13.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
-				PRODUCT_BUNDLE_IDENTIFIER = de.ecsec.AlertController;
-				PRODUCT_NAME = "$(TARGET_NAME)";
+				PRODUCT_BUNDLE_IDENTIFIER = "de.ecsec.iOS-OeC-testApp";
+				PRODUCT_NAME = iOS_OeC_testApp;
 				PROVISIONING_PROFILE_SPECIFIER = "";
 				SWIFT_VERSION = 4.0;
 				TARGETED_DEVICE_FAMILY = 1;
@@ -355,7 +355,7 @@
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
-		6C702FC620D7DA0E000083E1 /* Build configuration list for PBXProject "AlertController" */ = {
+		6C702FC620D7DA0E000083E1 /* Build configuration list for PBXProject "iOS_OeC_testApp" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				6C702FDB20D7DA0E000083E1 /* Debug */,
@@ -364,7 +364,7 @@
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
 		};
-		6C702FDD20D7DA0E000083E1 /* Build configuration list for PBXNativeTarget "AlertController" */ = {
+		6C702FDD20D7DA0E000083E1 /* Build configuration list for PBXNativeTarget "iOS_OeC_testApp" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				6C702FDE20D7DA0E000083E1 /* Debug */,

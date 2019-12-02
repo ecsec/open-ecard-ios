@@ -15,9 +15,9 @@
             <BuildableReference
                BuildableIdentifier = "primary"
                BlueprintIdentifier = "6C702FCA20D7DA0E000083E1"
-               BuildableName = "AlertController.app"
-               BlueprintName = "AlertController"
-               ReferencedContainer = "container:AlertController.xcodeproj">
+               BuildableName = "iOS_OeC_testApp.app"
+               BlueprintName = "iOS_OeC_testApp"
+               ReferencedContainer = "container:iOS_OeC_testApp.xcodeproj">
             </BuildableReference>
          </BuildActionEntry>
       </BuildActionEntries>
@@ -45,9 +45,9 @@
          <BuildableReference
             BuildableIdentifier = "primary"
             BlueprintIdentifier = "6C702FCA20D7DA0E000083E1"
-            BuildableName = "AlertController.app"
-            BlueprintName = "AlertController"
-            ReferencedContainer = "container:AlertController.xcodeproj">
+            BuildableName = "iOS_OeC_testApp.app"
+            BlueprintName = "iOS_OeC_testApp"
+            ReferencedContainer = "container:iOS_OeC_testApp.xcodeproj">
          </BuildableReference>
       </BuildableProductRunnable>
    </LaunchAction>
@@ -62,9 +62,9 @@
          <BuildableReference
             BuildableIdentifier = "primary"
             BlueprintIdentifier = "6C702FCA20D7DA0E000083E1"
-            BuildableName = "AlertController.app"
-            BlueprintName = "AlertController"
-            ReferencedContainer = "container:AlertController.xcodeproj">
+            BuildableName = "iOS_OeC_testApp.app"
+            BlueprintName = "iOS_OeC_testApp"
+            ReferencedContainer = "container:iOS_OeC_testApp.xcodeproj">
          </BuildableReference>
       </BuildableProductRunnable>
    </ProfileAction>
