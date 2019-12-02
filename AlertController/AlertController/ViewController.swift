@@ -213,20 +213,19 @@ class ViewController: UIViewController, WKNavigationDelegate {
     }
     
     class EacControllerStart: NSObject, ControllerCallbackProtocol, EacInteractionProtocol {
-        func onPinRequest(_ enterPin: (NSObjectProtocol & ConfirmPasswordOperationProtocol)!) {
-            print("onPinRequest")
+        fileprivate func showPinRequest(_ enterPin: (NSObjectProtocol & ConfirmPasswordOperationProtocol)?, message: String) {
             DispatchQueue.main.async{
-
-                let alert = UIAlertController(title: "Enter pin", message:"" , preferredStyle: .alert)
-                           //Add the text field. You can configure it however you need.
+                
+                let alert = UIAlertController(title: "Enter pin", message: message, preferredStyle: .alert)
+                //Add the text field. You can configure it however you need.
                 alert.addTextField { (pin) in
                     pin.placeholder = "pin"
                     pin.isSecureTextEntry = true
                     pin.keyboardType = .numberPad
                 }
-
+                
                 //the cancel action doing nothing
-                let cancelAction = UIAlertAction(title: "Cancel", style: .destructive, handler: {[weak alert] (_) in 
+                let cancelAction = UIAlertAction(title: "Cancel", style: .destructive, handler: {[weak alert] (_) in
                     print("cancelling")
                     self.ctxComp.cancelActivation()
                 })
@@ -236,20 +235,33 @@ class ViewController: UIViewController, WKNavigationDelegate {
                         print("Issue with Alert TextFields")
                         return
                     }
-
-                    enterPin.enter(pin.text)
-
+                    
+                    enterPin!.enter(pin.text)
+                    
                 })
-
+                
                 //adding the actions to alertController
                 alert.addAction(acceptAction)
                 alert.addAction(cancelAction)
-
+                
                 // Presenting the alert
                 self.v.present(alert, animated: true, completion: nil)
             }
-
         }
+        
+        func onPinRequest(_ enterPin: (NSObjectProtocol & ConfirmPasswordOperationProtocol)!) {
+            print("onPinRequest")
+            
+            showPinRequest(enterPin, message: "")
+        }
+        
+        func onPinRequest(_ attempt: Int32, withEnterPin enterPin: (NSObjectProtocol & ConfirmPasswordOperationProtocol)!) {
+            print("onPinRequest with attempt")
+            
+            showPinRequest(enterPin, message: "Pin attempts remaining \(attempt)")
+            
+        }
+
         
         let frm : OpenEcardProtocol;
         var msgHandler : NFCOverlayMessageHandlerProtocol?;
@@ -274,44 +286,6 @@ class ViewController: UIViewController, WKNavigationDelegate {
             print("requestCardInsertion with handler ")
         }
         
-        func onPinRequest(_ attempt: Int32, withEnterPin enterPin: (NSObjectProtocol & ConfirmPasswordOperationProtocol)!) {
-            print("onPinRequest")
-
-            DispatchQueue.main.async{
-
-                let alert = UIAlertController(title: "Enter pin", message:"Pin attempts remaining \(attempt)" , preferredStyle: .alert)
-                           //Add the text field. You can configure it however you need.
-                alert.addTextField { (pin) in
-                    pin.placeholder = "pin"
-                    pin.isSecureTextEntry = true
-                    pin.keyboardType = .numberPad
-                }
-
-                //the cancel action doing nothing
-                let cancelAction = UIAlertAction(title: "Cancel", style: .destructive, handler: {[weak alert] (_) in 
-                    print("cancelling")
-                    self.ctxComp.cancelActivation()
-                })
-                //the confirm action taking the inputs
-                let acceptAction = UIAlertAction(title: "Enter", style: .default, handler: { [weak alert] (_) in
-                    guard let pin = alert?.textFields?[0] else {
-                        print("Issue with Alert TextFields")
-                        return
-                    }
-
-                    enterPin.enter(pin.text)
-
-                })
-
-                //adding the actions to alertController
-                alert.addAction(acceptAction)
-                alert.addAction(cancelAction)
-
-                // Presenting the alert
-                self.v.present(alert, animated: true, completion: nil)
-            }
-        }
-
         func onPinCanRequest(_ enterPinCan: (NSObjectProtocol & ConfirmPinCanOperationProtocol)!) {
             print("onPinCanRequest")
             DispatchQueue.main.async{
@@ -395,45 +369,49 @@ class ViewController: UIViewController, WKNavigationDelegate {
         
         func onServerData(_ data: (NSObjectProtocol & ServerDataProtocol)!, withTransactionData transactionData: String!, withSelectReadWrite selectReadWrite: (NSObjectProtocol & ConfirmAttributeSelectionOperationProtocol)!) {
             print("onServerData")
+            
+            let duBytes = data.getTermsOfUsage()?.getDataBytes()  ?? Data.init()
+            print(NSString.init(data: duBytes, encoding: String.Encoding.utf8.rawValue))
 
-            DispatchQueue.main.async{
-                //simple alert dialog
-                let alertController = UIAlertController(title: "", message: "", preferredStyle: UIAlertControllerStyle.alert);
-//                alertController.addAction(UIAlertAction(title: "Cancel", style: UIAlertActionStyle.cancel, handler: nil));
-
-                var fieldCount = 0 
-                var fieldHeight = 33
-
-                var switches : [UISwitch] = Array()
-
-                for itm in data.getReadAccessAttributes(){
-
-                    let swtch = UISwitch(frame: CGRect(x: 0, y: fieldHeight * fieldCount, width: 250, height: 15))
-                    let lbl = UILabel(frame: CGRect(x: 60, y: fieldHeight * fieldCount + 5, width: 250, height: 15))
-                    lbl.text = itm.getText()
-                    swtch.setOn(itm.isChecked(), animated: true)
-                    switches.append(swtch)
-                    fieldCount += 1
-                    
-                    alertController.view.addSubview(swtch)
-                    alertController.view.addSubview(lbl)
-                }
-
-                var height:NSLayoutConstraint = NSLayoutConstraint(item: alertController.view, attribute: NSLayoutConstraint.Attribute.height, relatedBy: NSLayoutConstraint.Relation.equal, toItem: nil, attribute: NSLayoutConstraint.Attribute.notAnAttribute, multiplier: 1, constant: CGFloat(fieldHeight*(2+fieldCount)))
-                alertController.view.addConstraint(height);
-                alertController.addAction(UIAlertAction(title: "OK", style: .default, handler: {[weak alertController] (_) in
-                    var idx = 0
-                    for itm in data.getReadAccessAttributes(){
-                            itm.setChecked(switches[idx].isOn)
-                            idx += 1;
-                        }
-
-                    selectReadWrite.enter(data.getReadAccessAttributes(), withWrite: nil)
- 
-                }))
-
-                self.v.present(alertController, animated: true, completion: { () -> Void in })
-            }
+            selectReadWrite.enter(data.getReadAccessAttributes(), withWrite: nil)
+//            DispatchQueue.main.async{
+//                //simple alert dialog
+//                let alertController = UIAlertController(title: "", message: "", preferredStyle: UIAlertControllerStyle.alert);
+////                alertController.addAction(UIAlertAction(title: "Cancel", style: UIAlertActionStyle.cancel, handler: nil));
+//
+//                var fieldCount = 0 
+//                var fieldHeight = 33
+//
+//                var switches : [UISwitch] = Array()
+//
+//                for itm in data.getReadAccessAttributes(){
+//
+//                    let swtch = UISwitch(frame: CGRect(x: 0, y: fieldHeight * fieldCount, width: 250, height: 15))
+//                    let lbl = UILabel(frame: CGRect(x: 60, y: fieldHeight * fieldCount + 5, width: 250, height: 15))
+//                    lbl.text = itm.getText()
+//                    swtch.setOn(itm.isChecked(), animated: true)
+//                    switches.append(swtch)
+//                    fieldCount += 1
+//                    
+//                    alertController.view.addSubview(swtch)
+//                    alertController.view.addSubview(lbl)
+//                }
+//
+//                var height:NSLayoutConstraint = NSLayoutConstraint(item: alertController.view, attribute: NSLayoutConstraint.Attribute.height, relatedBy: NSLayoutConstraint.Relation.equal, toItem: nil, attribute: NSLayoutConstraint.Attribute.notAnAttribute, multiplier: 1, constant: CGFloat(fieldHeight*(2+fieldCount)))
+//                alertController.view.addConstraint(height);
+//                alertController.addAction(UIAlertAction(title: "OK", style: .default, handler: {[weak alertController] (_) in
+//                    var idx = 0
+//                    for itm in data.getReadAccessAttributes(){
+//                            itm.setChecked(switches[idx].isOn)
+//                            idx += 1;
+//                        }
+//
+//                    selectReadWrite.enter(data.getReadAccessAttributes(), withWrite: nil)
+// 
+//                }))
+//
+//                self.v.present(alertController, animated: true, completion: { () -> Void in })
+//            }
 
         }
         
