@@ -373,45 +373,44 @@ class ViewController: UIViewController, WKNavigationDelegate {
             let duBytes = data.getTermsOfUsage()?.getDataBytes()  ?? Data.init()
             print(NSString.init(data: duBytes, encoding: String.Encoding.utf8.rawValue))
 
-            selectReadWrite.enter(data.getReadAccessAttributes(), withWrite: nil)
-//            DispatchQueue.main.async{
-//                //simple alert dialog
-//                let alertController = UIAlertController(title: "", message: "", preferredStyle: UIAlertControllerStyle.alert);
-////                alertController.addAction(UIAlertAction(title: "Cancel", style: UIAlertActionStyle.cancel, handler: nil));
-//
-//                var fieldCount = 0 
-//                var fieldHeight = 33
-//
-//                var switches : [UISwitch] = Array()
-//
-//                for itm in data.getReadAccessAttributes(){
-//
-//                    let swtch = UISwitch(frame: CGRect(x: 0, y: fieldHeight * fieldCount, width: 250, height: 15))
-//                    let lbl = UILabel(frame: CGRect(x: 60, y: fieldHeight * fieldCount + 5, width: 250, height: 15))
-//                    lbl.text = itm.getText()
-//                    swtch.setOn(itm.isChecked(), animated: true)
-//                    switches.append(swtch)
-//                    fieldCount += 1
-//                    
-//                    alertController.view.addSubview(swtch)
-//                    alertController.view.addSubview(lbl)
-//                }
-//
-//                var height:NSLayoutConstraint = NSLayoutConstraint(item: alertController.view, attribute: NSLayoutConstraint.Attribute.height, relatedBy: NSLayoutConstraint.Relation.equal, toItem: nil, attribute: NSLayoutConstraint.Attribute.notAnAttribute, multiplier: 1, constant: CGFloat(fieldHeight*(2+fieldCount)))
-//                alertController.view.addConstraint(height);
-//                alertController.addAction(UIAlertAction(title: "OK", style: .default, handler: {[weak alertController] (_) in
-//                    var idx = 0
-//                    for itm in data.getReadAccessAttributes(){
-//                            itm.setChecked(switches[idx].isOn)
-//                            idx += 1;
-//                        }
-//
-//                    selectReadWrite.enter(data.getReadAccessAttributes(), withWrite: nil)
-// 
-//                }))
-//
-//                self.v.present(alertController, animated: true, completion: { () -> Void in })
-//            }
+            DispatchQueue.main.async{
+                //simple alert dialog
+                let alertController = UIAlertController(title: "", message: "", preferredStyle: UIAlertControllerStyle.alert);
+//                alertController.addAction(UIAlertAction(title: "Cancel", style: UIAlertActionStyle.cancel, handler: nil));
+
+                var fieldCount = 0 
+                var fieldHeight = 33
+
+                var switches : [UISwitch] = Array()
+
+                for itm in data.getReadAccessAttributes(){
+
+                    let swtch = UISwitch(frame: CGRect(x: 0, y: fieldHeight * fieldCount, width: 250, height: 15))
+                    let lbl = UILabel(frame: CGRect(x: 60, y: fieldHeight * fieldCount + 5, width: 250, height: 15))
+                    lbl.text = itm.getText()
+                    swtch.setOn(itm.isChecked(), animated: true)
+                    switches.append(swtch)
+                    fieldCount += 1
+                    
+                    alertController.view.addSubview(swtch)
+                    alertController.view.addSubview(lbl)
+                }
+
+                var height:NSLayoutConstraint = NSLayoutConstraint(item: alertController.view, attribute: NSLayoutConstraint.Attribute.height, relatedBy: NSLayoutConstraint.Relation.equal, toItem: nil, attribute: NSLayoutConstraint.Attribute.notAnAttribute, multiplier: 1, constant: CGFloat(fieldHeight*(2+fieldCount)))
+                alertController.view.addConstraint(height);
+                alertController.addAction(UIAlertAction(title: "OK", style: .default, handler: {[weak alertController] (_) in
+                    var idx = 0
+                    for itm in data.getReadAccessAttributes(){
+                            itm.setChecked(switches[idx].isOn)
+                            idx += 1;
+                        }
+
+                    selectReadWrite.enter(data.getReadAccessAttributes(), withWrite: nil)
+ 
+                }))
+
+                self.v.present(alertController, animated: true, completion: { () -> Void in })
+            }
 
         }
         
