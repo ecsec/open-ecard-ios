@@ -472,24 +472,17 @@ class ViewController: UIViewController, WKNavigationDelegate {
         func onAuthenticationCompletion(_ result: (NSObjectProtocol & ActivationResultProtocol)!) {
             print("onAuthenticationCompletion", result);        
 
-            if let urlString = result.getRedirectUrl() {
-            
-            let url = URL(string: urlString)!
-            print("requesting url: \(urlString)")
-            var request = URLRequest(url: url)
-            request.httpMethod = "GET" 
-            NSURLConnection.sendAsynchronousRequest(request, queue: OperationQueue.main) {(response, data, error) in
-                guard let data = data else { return }
-                print(String(data: data, encoding: .utf8)!)
+            DispatchQueue.main.async{
+                if let urlString = result.getRedirectUrl() {
+                
+                let url = URL(string: urlString)!
+                print("requesting url: \(urlString)")
+                var request = URLRequest(url: url)
+                    self.v.webView.load(request)
+                    self.v.webView.isHidden = false
                 }
-            }else
-            {
-                print("Completeted with no RedirectURL")
             }
-            
         }
-        
-        
     }
    
     class ContextCompletion: NSObject, StartServiceHandlerProtocol {
