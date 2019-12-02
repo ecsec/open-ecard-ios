@@ -530,6 +530,7 @@ class ViewController: UIViewController, WKNavigationDelegate {
     override func viewDidLoad() {
         super.viewDidLoad()
         
+        //tf_directEACURL.text = "https://test.governikus-eid.de:443/Autent-DemoApplication/RequestServlet;?provider=demo_epa_20&redirect=true";
         tf_directEACURL.text = "https://service.dev.skidentity.de:443/tctoken";
         tf_testServerURL.text = "https://service.dev.skidentity.de:443";
         
