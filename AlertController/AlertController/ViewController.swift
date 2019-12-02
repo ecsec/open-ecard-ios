@@ -213,6 +213,44 @@ class ViewController: UIViewController, WKNavigationDelegate {
     }
     
     class EacControllerStart: NSObject, ControllerCallbackProtocol, EacInteractionProtocol {
+        func onPinRequest(_ enterPin: (NSObjectProtocol & ConfirmPasswordOperationProtocol)!) {
+            print("onPinRequest")
+            DispatchQueue.main.async{
+
+                let alert = UIAlertController(title: "Enter pin", message:"" , preferredStyle: .alert)
+                           //Add the text field. You can configure it however you need.
+                alert.addTextField { (pin) in
+                    pin.placeholder = "pin"
+                    pin.isSecureTextEntry = true
+                    pin.keyboardType = .numberPad
+                }
+
+                //the cancel action doing nothing
+                let cancelAction = UIAlertAction(title: "Cancel", style: .destructive, handler: {[weak alert] (_) in 
+                    print("cancelling")
+                    self.ctxComp.cancelActivation()
+                })
+                //the confirm action taking the inputs
+                let acceptAction = UIAlertAction(title: "Enter", style: .default, handler: { [weak alert] (_) in
+                    guard let pin = alert?.textFields?[0] else {
+                        print("Issue with Alert TextFields")
+                        return
+                    }
+
+                    enterPin.enter(pin.text)
+
+                })
+
+                //adding the actions to alertController
+                alert.addAction(acceptAction)
+                alert.addAction(cancelAction)
+
+                // Presenting the alert
+                self.v.present(alert, animated: true, completion: nil)
+            }
+
+        }
+        
         let frm : OpenEcardProtocol;
         var msgHandler : NFCOverlayMessageHandlerProtocol?;
         var v :ViewController
