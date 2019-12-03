@@ -6,16 +6,7 @@ import OpenEcard.open_ecard_mobile_lib
 
 class ViewController: UIViewController, WKNavigationDelegate {
     class PinMgmtControllerStart: NSObject, ControllerCallbackProtocol, PinManagementInteractionProtocol{
-        
-        func onCardPukBlocked() {
-            print("cardBlocked")
-        }
-        
-        func onCardDeactivated() {
-            print("cardDeactivated")
-        }
-        
-        
+       
         let frm : OpenEcardProtocol;
         var msgHandler : NFCOverlayMessageHandlerProtocol?;
         var v :ViewController
@@ -29,13 +20,11 @@ class ViewController: UIViewController, WKNavigationDelegate {
             super.init()
         }
 
-
         func onPinChangeable(_ attempts: Int32, withEnterOldNewPins enterOldNewPins: (NSObjectProtocol & ConfirmOldSetNewPasswordOperationProtocol)!) {
             print("onPinChangeable. attempts: \(attempts)");
             DispatchQueue.main.async{
 
                 let alert = UIAlertController(title: "Enter old and new pin", message: "Pin attempts remaining \(attempts)", preferredStyle: .alert)
-                           //Add the text field. You can configure it however you need.
                 alert.addTextField { (pin) in
                     pin.placeholder = "pin"
                     pin.keyboardType = .numberPad
@@ -52,13 +41,11 @@ class ViewController: UIViewController, WKNavigationDelegate {
                     cnpin.keyboardType = .numberPad
                 }
 
-                //the cancel action doing nothing
                 let cancelAction = UIAlertAction(title: "Cancel", style: .destructive, handler: {[weak alert] (_) in 
                     print("cancelling")
                     self.ctxComp.cancelActivation()
                 })
 
-                //the confirm action taking the inputs
                 let acceptAction = UIAlertAction(title: "Enter", style: .default, handler: { [weak alert] (_) in
                     guard let pin = alert?.textFields?[0], let npin = alert?.textFields?[1], let cnpin = alert?.textFields?[2] else {
                         print("Issue with Alert TextFields")
@@ -70,15 +57,11 @@ class ViewController: UIViewController, WKNavigationDelegate {
                     }else{
                         print("new pin and confirmation not equal")
                     }
-                    
-
                 })
 
-                //adding the actions to alertController
                 alert.addAction(acceptAction)
                 alert.addAction(cancelAction)
 
-                // Presenting the alert
                 self.v.present(alert, animated: true, completion: nil)
             }
 
@@ -89,7 +72,6 @@ class ViewController: UIViewController, WKNavigationDelegate {
             DispatchQueue.main.async{
 
                 let alert = UIAlertController(title: "Enter current pin/can/new pin", message: "", preferredStyle: .alert)
-                           //Add the text field. You can configure it however you need.
                 alert.addTextField { (pin) in
                     pin.placeholder = "pin"
                     pin.isSecureTextEntry = true
@@ -111,14 +93,10 @@ class ViewController: UIViewController, WKNavigationDelegate {
                     cnpin.keyboardType = .numberPad
                 }
 
-
-
-                //the cancel action doing nothing
                 let cancelAction = UIAlertAction(title: "Cancel", style: .destructive, handler: {[weak alert] (_) in 
                     print("cancelling")
                     self.ctxComp.cancelActivation()
                 })
-                //the confirm action taking the inputs
                 let acceptAction = UIAlertAction(title: "Enter", style: .default, handler: { [weak alert] (_) in
                     guard let pin = alert?.textFields?[0], let can = alert?.textFields?[1], let newPin = alert?.textFields?[2], let cnpin = alert?.textFields?[3] else {
                         print("Issue with Alert TextFields")
@@ -134,11 +112,9 @@ class ViewController: UIViewController, WKNavigationDelegate {
 
                 })
 
-                //adding the actions to alertController
                 alert.addAction(acceptAction)
                 alert.addAction(cancelAction)
 
-                // Presenting the alert
                 self.v.present(alert, animated: true, completion: nil)
             }
         }
@@ -148,19 +124,16 @@ class ViewController: UIViewController, WKNavigationDelegate {
             DispatchQueue.main.async{
 
                 let alert = UIAlertController(title: "Enter puk", message: "", preferredStyle: .alert)
-                           //Add the text field. You puk configure it however you need.
                 alert.addTextField { (puk) in
                     puk.placeholder = "puk"
                     puk.isSecureTextEntry = true
                     puk.keyboardType = .numberPad
                 }
 
-                //the cancel action doing nothing
                 let cancelAction = UIAlertAction(title: "Cancel", style: .destructive, handler: {[weak alert] (_) in 
                     print("cancelling")
                     self.ctxComp.cancelActivation()
                 })
-                //the confirm action taking the inputs
                 let acceptAction = UIAlertAction(title: "Enter", style: .default, handler: { [weak alert] (_) in
                     guard let puk = alert?.textFields?[0] else {
                         print("Issue with Alert TextFields")
@@ -168,17 +141,22 @@ class ViewController: UIViewController, WKNavigationDelegate {
                     }
 
                     unblockWithPuk.enter(puk.text)
-                    
 
                 })
 
-                //adding the actions to alertController
                 alert.addAction(acceptAction)
                 alert.addAction(cancelAction)
 
-                // Presenting the alert
                 self.v.present(alert, animated: true, completion: nil)
             }
+        }
+        
+        func onCardPukBlocked() {
+            print("cardBlocked")
+        }
+        
+        func onCardDeactivated() {
+            print("cardDeactivated")
         }
        
         func onStarted() {
@@ -208,28 +186,37 @@ class ViewController: UIViewController, WKNavigationDelegate {
         func onCardRemoved() {
             print("onCardRemoved");
         }
-        
-                
     }
     
     class EacControllerStart: NSObject, ControllerCallbackProtocol, EacInteractionProtocol {
+       
+        let frm : OpenEcardProtocol;
+        var msgHandler : NFCOverlayMessageHandlerProtocol?;
+        var v :ViewController
+        var ctxComp : ContextCompletion
+        
+        init(frm : OpenEcardProtocol, v:ViewController, ctx: ContextCompletion) {
+            self.v = v
+            self.frm = frm
+            self.msgHandler = nil
+            self.ctxComp = ctx
+            super.init()
+        }
+        
         fileprivate func showPinRequest(_ enterPin: (NSObjectProtocol & ConfirmPasswordOperationProtocol)?, message: String) {
             DispatchQueue.main.async{
                 
                 let alert = UIAlertController(title: "Enter pin", message: message, preferredStyle: .alert)
-                //Add the text field. You can configure it however you need.
                 alert.addTextField { (pin) in
                     pin.placeholder = "pin"
                     pin.isSecureTextEntry = true
                     pin.keyboardType = .numberPad
                 }
                 
-                //the cancel action doing nothing
                 let cancelAction = UIAlertAction(title: "Cancel", style: .destructive, handler: {[weak alert] (_) in
                     print("cancelling")
                     self.ctxComp.cancelActivation()
                 })
-                //the confirm action taking the inputs
                 let acceptAction = UIAlertAction(title: "Enter", style: .default, handler: { [weak alert] (_) in
                     guard let pin = alert?.textFields?[0] else {
                         print("Issue with Alert TextFields")
@@ -240,11 +227,9 @@ class ViewController: UIViewController, WKNavigationDelegate {
                     
                 })
                 
-                //adding the actions to alertController
                 alert.addAction(acceptAction)
                 alert.addAction(cancelAction)
                 
-                // Presenting the alert
                 self.v.present(alert, animated: true, completion: nil)
             }
         }
@@ -260,20 +245,6 @@ class ViewController: UIViewController, WKNavigationDelegate {
             
             showPinRequest(enterPin, message: "Pin attempts remaining \(attempt)")
             
-        }
-
-        
-        let frm : OpenEcardProtocol;
-        var msgHandler : NFCOverlayMessageHandlerProtocol?;
-        var v :ViewController
-        var ctxComp : ContextCompletion
-        
-        init(frm : OpenEcardProtocol, v:ViewController, ctx: ContextCompletion) {
-            self.v = v
-            self.frm = frm
-            self.msgHandler = nil
-            self.ctxComp = ctx
-            super.init()
         }
         
         
@@ -291,7 +262,6 @@ class ViewController: UIViewController, WKNavigationDelegate {
             DispatchQueue.main.async{
 
                 let alert = UIAlertController(title: "Enter pin/can", message: "", preferredStyle: .alert)
-                           //Add the text field. You can configure it however you need.
                 alert.addTextField { (pin) in
                     pin.placeholder = "pin"
                     pin.isSecureTextEntry = true
@@ -303,12 +273,10 @@ class ViewController: UIViewController, WKNavigationDelegate {
                     can.keyboardType = .numberPad
                 }
 
-                //the cancel action doing nothing
                 let cancelAction = UIAlertAction(title: "Cancel", style: .destructive, handler: {[weak alert] (_) in 
                     print("cancelling")
                     self.ctxComp.cancelActivation()
                 })
-                //the confirm action taking the inputs
                 let acceptAction = UIAlertAction(title: "Enter", style: .default, handler: { [weak alert] (_) in
                     guard let pin = alert?.textFields?[0], let can = alert?.textFields?[1] else {
                         print("Issue with Alert TextFields")
@@ -320,11 +288,9 @@ class ViewController: UIViewController, WKNavigationDelegate {
 
                 })
 
-                //adding the actions to alertController
                 alert.addAction(acceptAction)
                 alert.addAction(cancelAction)
 
-                // Presenting the alert
                 self.v.present(alert, animated: true, completion: nil)
             }
 
@@ -335,20 +301,17 @@ class ViewController: UIViewController, WKNavigationDelegate {
             DispatchQueue.main.async{
 
                 let alert = UIAlertController(title: "Enter can", message: "", preferredStyle: .alert)
-                           //Add the text field. You can configure it however you need.
                 alert.addTextField { (can) in
                     can.placeholder = "can"
                     can.isSecureTextEntry = true
                     can.keyboardType = .numberPad
                 }
 
-                //the cancel action doing nothing
                 let cancelAction = UIAlertAction(title: "Cancel", style: .destructive, handler: {[weak alert] (_) in 
                     print("cancelling")
                     self.ctxComp.cancelActivation()
                 })
 
-                //the confirm action taking the inputs
                 let acceptAction = UIAlertAction(title: "Enter", style: .default, handler: { [weak alert] (_) in
                     guard let can = alert?.textFields?[0] else {
                         print("Issue with Alert TextFields")
@@ -358,11 +321,9 @@ class ViewController: UIViewController, WKNavigationDelegate {
                     enterCan.enter(can.text)
                 })
 
-                //adding the actions to alertController
                 alert.addAction(acceptAction)
                 alert.addAction(cancelAction)
 
-                // Presenting the alert
                 self.v.present(alert, animated: true, completion: nil)
             }
         }
@@ -374,9 +335,7 @@ class ViewController: UIViewController, WKNavigationDelegate {
             print(NSString.init(data: duBytes, encoding: String.Encoding.utf8.rawValue))
 
             DispatchQueue.main.async{
-                //simple alert dialog
                 let alertController = UIAlertController(title: "", message: "", preferredStyle: UIAlertControllerStyle.alert);
-//                alertController.addAction(UIAlertAction(title: "Cancel", style: UIAlertActionStyle.cancel, handler: nil));
 
                 var fieldCount = 0 
                 var fieldHeight = 33
@@ -441,7 +400,6 @@ class ViewController: UIViewController, WKNavigationDelegate {
             print("onCardRemoved");
         }
         
-        //controller callback
         func onStarted() {
             print("onStarted")
         }
@@ -519,12 +477,10 @@ class ViewController: UIViewController, WKNavigationDelegate {
             self.ready = false 
         }
     }
-    
-    
-    
-    lazy var frm = createOpenEcard()
-    var ctxCompletion = ContextCompletion()
-   
+
+    override func didReceiveMemoryWarning() {
+        super.didReceiveMemoryWarning()
+    }
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -542,10 +498,6 @@ class ViewController: UIViewController, WKNavigationDelegate {
         
         ini()
     }
-
-    override func didReceiveMemoryWarning() {
-        super.didReceiveMemoryWarning()
-    }
     
     func ini(){
         print("Creating the context");
@@ -559,10 +511,12 @@ class ViewController: UIViewController, WKNavigationDelegate {
     
     
     @IBOutlet weak var tf_directEACURL: UITextView!
-    
     @IBOutlet weak var tf_testServerURL: UITextView!
 
     
+    lazy var frm = createOpenEcard()
+    var ctxCompletion = ContextCompletion()
+
     @IBAction func eacDirectURL(_ sender: Any) {
         ctxCompletion.performEAC()
     }
@@ -580,7 +534,6 @@ class ViewController: UIViewController, WKNavigationDelegate {
     }
     
     @IBOutlet var webView: WKWebView!
-    
     func webView(_ webView: WKWebView, didFinish navigation: WKNavigation!){
         var scriptContent = "var meta = document.createElement('meta');"
         scriptContent += "meta.name='viewport';"
