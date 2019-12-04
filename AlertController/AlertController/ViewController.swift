@@ -4,7 +4,7 @@ import OpenEcard
 import WebKit
 import OpenEcard.open_ecard_mobile_lib
 
-class ViewController: UIViewController, WKNavigationDelegate {
+class ViewController: UIViewController, WKNavigationDelegate, UITextViewDelegate {
     class PinMgmtControllerStart: NSObject, ControllerCallbackProtocol, PinManagementInteractionProtocol{
        
         let frm : OpenEcardProtocol;
@@ -486,11 +486,20 @@ class ViewController: UIViewController, WKNavigationDelegate {
         self.webView.navigationDelegate = self
         self.webView.isHidden = true
 
-
+        self.tf_directEACURL.delegate = self
         self.tf_directEACURL.backgroundColor = UIColor.init(displayP3Red: 1, green: 1, blue: 1, alpha: 1)
+        self.tf_testServerURL.delegate = self
         self.tf_testServerURL.backgroundColor = UIColor.init(displayP3Red: 1, green: 1, blue: 1, alpha: 1)
         
         ini()
+    }
+
+    func textView(_ textView: UITextView, shouldChangeTextIn range: NSRange, replacementText text: String) -> Bool {
+        if (text == "\n"){
+            textView.resignFirstResponder()
+            return false
+        }
+        return true
     }
     
     func ini(){
