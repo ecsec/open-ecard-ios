@@ -428,7 +428,6 @@ class ViewController: UIViewController, WKNavigationDelegate {
         var currentPinMgmtActivation: PinMgmtControllerStart? = nil;
         var currentController: ActivationControllerProtocol? = nil;
         var v: ViewController?
-        var url : String?
         var ready = false
       
         func setFrm(frm : OpenEcardProtocol){
@@ -437,10 +436,6 @@ class ViewController: UIViewController, WKNavigationDelegate {
      
         func setViewCtrl(v:ViewController){
             self.v = v
-        }
-
-        func setURL(url: String){
-            self.url = url
         }
         
         func onSuccess(_ source: (NSObjectProtocol & ActivationSourceProtocol)!) {
@@ -460,9 +455,9 @@ class ViewController: UIViewController, WKNavigationDelegate {
             self.currentController?.cancelAuthentication()
         }
 
-        func performEAC(){
+        func performEAC(url: String){
             if(self.ready){
-                self.currentController = self.eacFactory?.create(self.url, withActivation: currentEacActivation, with: currentEacActivation);
+                self.currentController = self.eacFactory?.create(url, withActivation: currentEacActivation, with: currentEacActivation);
             }
         }
            
@@ -502,10 +497,8 @@ class ViewController: UIViewController, WKNavigationDelegate {
         print("Creating the context");
         var context = frm?.context("Please provide card", withDefaultNFCCardRecognizedMessage: "Found card")
         context?.start(ctxCompletion)
-        let urlstart = "http://localhost/eID-Client?tcTokenURL="
         ctxCompletion.setFrm(frm: frm!)
         ctxCompletion.setViewCtrl(v:self)
-        ctxCompletion.setURL(url: urlstart + frm!.prepareTCTokenURL(tf_directEACURL.text))
     }
     
     
@@ -517,7 +510,8 @@ class ViewController: UIViewController, WKNavigationDelegate {
     var ctxCompletion = ContextCompletion()
 
     @IBAction func eacDirectURL(_ sender: Any) {
-        ctxCompletion.performEAC()
+        let urlstart = "http://localhost/eID-Client?tcTokenURL="
+        ctxCompletion.performEAC(url: urlstart + frm!.prepareTCTokenURL(tf_directEACURL.text))
     }
     
     @IBAction func eacWithServer(_ sender: Any) {
@@ -550,8 +544,7 @@ class ViewController: UIViewController, WKNavigationDelegate {
         
         if let host = navigationAction.request.url?.host {
             if host.contains("localhost") || host.contains("127.0.0.1") {
-                ctxCompletion.setURL(url: navigationAction.request.url!.absoluteString)
-                ctxCompletion.performEAC()
+                ctxCompletion.performEAC(url: navigationAction.request.url!.absoluteString)
                 decisionHandler(.cancel)
                 webView.isHidden = true
                 return
