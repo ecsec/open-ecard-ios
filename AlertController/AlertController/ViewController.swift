@@ -415,6 +415,15 @@ class ViewController: UIViewController, WKNavigationDelegate, UITextViewDelegate
                 var request = URLRequest(url: url)
                     self.v.webView.load(request)
                     self.v.webView.isHidden = false 
+                }else{
+                    DispatchQueue.main.async{
+                        let alert = UIAlertController(title: "Process end", message: "Process ended without redirect Message: \(result.getErrorMessage())", preferredStyle: .alert)
+                        let cancelAction = UIAlertAction(title: "Cancel", style: .destructive, handler: {[weak alert] (_) in 
+                            print("cancelling")
+                        })
+                        alert.addAction(cancelAction)
+                        self.v.present(alert, animated: true, completion: nil)
+                    }
                 }
             }
         }
