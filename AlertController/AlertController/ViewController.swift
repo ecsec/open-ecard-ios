@@ -331,6 +331,8 @@ class ViewController: UIViewController, WKNavigationDelegate, UITextViewDelegate
         func onServerData(_ data: (NSObjectProtocol & ServerDataProtocol)!, withTransactionData transactionData: String!, withSelectReadWrite selectReadWrite: (NSObjectProtocol & ConfirmAttributeSelectionOperationProtocol)!) {
             print("onServerData")
             
+            frm.setDebugLogLevel()
+            
             let duBytes = data.getTermsOfUsage()?.getDataBytes()  ?? Data.init()
             print(NSString.init(data: duBytes, encoding: String.Encoding.utf8.rawValue))
 
