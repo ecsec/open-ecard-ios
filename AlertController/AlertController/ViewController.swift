@@ -53,11 +53,10 @@ class ViewController: UIViewController, WKNavigationDelegate, UITextViewDelegate
             super.init()
         }
 
-        func onPinChangeable(_ attempts: Int32, withEnterOldNewPins enterOldNewPins: (NSObjectProtocol & ConfirmOldSetNewPasswordOperationProtocol)!) {
-            print("onPinChangeable. attempts: \(attempts)");
+        fileprivate func displayPinChangeable(_ message: String, _ enterOldNewPins: (NSObjectProtocol & ConfirmOldSetNewPasswordOperationProtocol)) {
             DispatchQueue.main.async{
-
-                let alert = UIAlertController(title: "Enter old and new pin", message: "Pin attempts remaining \(attempts)", preferredStyle: .alert)
+                
+                let alert = UIAlertController(title: "Enter old and new pin", message: message, preferredStyle: .alert)
                 alert.addTextField { (pin) in
                     pin.placeholder = "pin"
                     pin.keyboardType = .numberPad
@@ -97,7 +96,18 @@ class ViewController: UIViewController, WKNavigationDelegate, UITextViewDelegate
 
                 self.v.present(alert, animated: true, completion: nil)
             }
-
+        }
+        
+        func onPinChangeable(_ enterOldNewPins: (NSObjectProtocol & ConfirmOldSetNewPasswordOperationProtocol)!) {
+            print("UI: onPinChangeable.");
+            let message = "Pin attempts remaining (??)";
+            displayPinChangeable(message, enterOldNewPins)
+        }
+        
+        func onPinChangeable(_ attempts: Int32, withEnterOldNewPins enterOldNewPins: (NSObjectProtocol & ConfirmOldSetNewPasswordOperationProtocol)!) {
+            print("UI: onPinChangeable. attempts: \(attempts)");
+            let message = "Pin attempts remaining \(attempts)";
+            displayPinChangeable(message, enterOldNewPins)
         }
         
         func onPinCanNewPinRequired(_ enterPinCanNewPin: (NSObjectProtocol & ConfirmPinCanNewPinOperationProtocol)!) {
