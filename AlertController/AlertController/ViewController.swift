@@ -5,6 +5,39 @@ import WebKit
 import OpenEcard.open_ecard_mobile_lib
 
 class ViewController: UIViewController, WKNavigationDelegate, UITextViewDelegate {
+    
+    class IOSNFCOptions: NSObject, NFCConfigProtocol {
+        func getProvideCardMessage() -> String! {
+            return "Please hold card to your phone"
+        }
+        
+        func getDefaultNFCCardRecognizedMessage() -> String! {
+            return "Please wait. A card has been detected"
+        }
+        
+        func getDefaultNFCErrorMessage() -> String! {
+            return "An error occurred communicating with the card."
+        }
+        
+        func getAquireNFCTagTimeoutMessage() -> String! {
+            return "Could not connect to a card. Please try again."
+        }
+        
+        func getNFCCompletionMessage() -> String! {
+            return "Finished communicating with the card"
+        }
+        
+        func getTagLostErrorMessage() -> String! {
+            return "Contact was lost with the card"
+        }
+        
+        func getDefaultCardConnectedMessage() -> String! {
+            return "Connected with the card."
+        }
+        
+        
+    }
+    
     class PinMgmtControllerStart: NSObject, ControllerCallbackProtocol, PinManagementInteractionProtocol{
        
         let frm : OpenEcardProtocol;
