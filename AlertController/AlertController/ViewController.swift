@@ -72,28 +72,28 @@ class ViewController: UIViewController, WKNavigationDelegate, UITextViewDelegate
                     cnpin.isSecureTextEntry = true
                     cnpin.keyboardType = .numberPad
                 }
-
-                let cancelAction = UIAlertAction(title: "Cancel", style: .destructive, handler: {[weak alert] (_) in 
-                    print("cancelling")
+                
+                let cancelAction = UIAlertAction(title: "Cancel", style: .destructive, handler: {[weak alert] (_) in
+                    print("UI: cancelling")
                     self.ctxComp.cancelActivation()
                 })
-
+                
                 let acceptAction = UIAlertAction(title: "Enter", style: .default, handler: { [weak alert] (_) in
                     guard let pin = alert?.textFields?[0], let npin = alert?.textFields?[1], let cnpin = alert?.textFields?[2] else {
-                        print("Issue with Alert TextFields")
+                        print("UI: Issue with Alert TextFields")
                         return
                     }
-
+                    
                     if(npin.text == cnpin.text){
                         enterOldNewPins.enter(pin.text, withNewPassword: npin.text)
                     }else{
-                        print("new pin and confirmation not equal")
+                        print("UI: new pin and confirmation not equal")
                     }
                 })
-
+                
                 alert.addAction(acceptAction)
                 alert.addAction(cancelAction)
-
+                
                 self.v.present(alert, animated: true, completion: nil)
             }
         }
@@ -111,7 +111,7 @@ class ViewController: UIViewController, WKNavigationDelegate, UITextViewDelegate
         }
         
         func onPinCanNewPinRequired(_ enterPinCanNewPin: (NSObjectProtocol & ConfirmPinCanNewPinOperationProtocol)!) {
-            print("onPinCanNewPinRequired")
+            print("UI: onPinCanNewPinRequired")
             DispatchQueue.main.async{
 
                 let alert = UIAlertController(title: "Enter current pin/can/new pin", message: "", preferredStyle: .alert)
@@ -137,19 +137,19 @@ class ViewController: UIViewController, WKNavigationDelegate, UITextViewDelegate
                 }
 
                 let cancelAction = UIAlertAction(title: "Cancel", style: .destructive, handler: {[weak alert] (_) in 
-                    print("cancelling")
+                    print("UI: cancelling")
                     self.ctxComp.cancelActivation()
                 })
                 let acceptAction = UIAlertAction(title: "Enter", style: .default, handler: { [weak alert] (_) in
                     guard let pin = alert?.textFields?[0], let can = alert?.textFields?[1], let newPin = alert?.textFields?[2], let cnpin = alert?.textFields?[3] else {
-                        print("Issue with Alert TextFields")
+                        print("UI: Issue with Alert TextFields")
                         return
                     }
 
                     if(newPin.text == cnpin.text){
                         enterPinCanNewPin.enter(pin.text, withCan: can.text, withNewPin: newPin.text)
                     }else{
-                        print("new pin and confirmation not equal")
+                        print("UI: new pin and confirmation not equal")
                     }
     
 
@@ -163,7 +163,7 @@ class ViewController: UIViewController, WKNavigationDelegate, UITextViewDelegate
         }
         
         func onPinBlocked(_ unblockWithPuk: (NSObjectProtocol & ConfirmPasswordOperationProtocol)!) {
-            print("onPinBlocked");
+            print("UI: onPinBlocked");
             DispatchQueue.main.async{
 
                 let alert = UIAlertController(title: "Enter puk", message: "", preferredStyle: .alert)
@@ -174,12 +174,12 @@ class ViewController: UIViewController, WKNavigationDelegate, UITextViewDelegate
                 }
 
                 let cancelAction = UIAlertAction(title: "Cancel", style: .destructive, handler: {[weak alert] (_) in 
-                    print("cancelling")
+                    print("UI: cancelling")
                     self.ctxComp.cancelActivation()
                 })
                 let acceptAction = UIAlertAction(title: "Enter", style: .default, handler: { [weak alert] (_) in
                     guard let puk = alert?.textFields?[0] else {
-                        print("Issue with Alert TextFields")
+                        print("UI: Issue with Alert TextFields")
                         return
                     }
 
@@ -195,39 +195,49 @@ class ViewController: UIViewController, WKNavigationDelegate, UITextViewDelegate
         }
         
         func onCardPukBlocked() {
-            print("cardBlocked")
+            print("UI: cardBlocked")
         }
         
         func onCardDeactivated() {
-            print("cardDeactivated")
+            print("UI: cardDeactivated")
         }
        
         func onStarted() {
-            print("onStarted");
+            print("UI: onStarted");
         }
         
         func onAuthenticationCompletion(_ result: (NSObjectProtocol & ActivationResultProtocol)!) {
-            print("onAuthenticationCompletion");
+            print("UI: onAuthenticationCompletion: ", result);
+            let code = result.getCode();
+            print("UI: resultCode", code.rawValue)
+            print("UI: resultMinor", result.getProcessResultMinor())
+            if (code == ActivationResultCode.INTERRUPTED){
+                print("UI: Interrupted")
+            } else if (code == ActivationResultCode.INTERNAL_ERROR){
+                print("UI: Internal error")
+            } else {
+                print("UI: Other")
+            }
         }
         
         func requestCardInsertion() {
-            print("requestCardInsertion");
+            print("UI: requestCardInsertion");
         }
         
         func requestCardInsertion(_ msgHandler: (NSObjectProtocol & NFCOverlayMessageHandlerProtocol)!) {
-            print("requestCardInsertion");
+            print("UI: requestCardInsertion");
         }
         
         func onCardInteractionComplete() {
-            print("onCardInteractionComplete");
+            print("UI: onCardInteractionComplete");
         }
         
         func onCardRecognized() {
-            print("onCardRecognized");
+            print("UI: onCardRecognized");
         }
         
         func onCardRemoved() {
-            print("onCardRemoved");
+            print("UI: onCardRemoved");
         }
     }
     
@@ -257,12 +267,12 @@ class ViewController: UIViewController, WKNavigationDelegate, UITextViewDelegate
                 }
                 
                 let cancelAction = UIAlertAction(title: "Cancel", style: .destructive, handler: {[weak alert] (_) in
-                    print("cancelling")
+                    print("UI: cancelling")
                     self.ctxComp.cancelActivation()
                 })
                 let acceptAction = UIAlertAction(title: "Enter", style: .default, handler: { [weak alert] (_) in
                     guard let pin = alert?.textFields?[0] else {
-                        print("Issue with Alert TextFields")
+                        print("UI: Issue with Alert TextFields")
                         return
                     }
                     
@@ -278,13 +288,13 @@ class ViewController: UIViewController, WKNavigationDelegate, UITextViewDelegate
         }
         
         func onPinRequest(_ enterPin: (NSObjectProtocol & ConfirmPasswordOperationProtocol)!) {
-            print("onPinRequest")
+            print("UI: onPinRequest")
             
             showPinRequest(enterPin, message: "")
         }
         
         func onPinRequest(_ attempt: Int32, withEnterPin enterPin: (NSObjectProtocol & ConfirmPasswordOperationProtocol)!) {
-            print("onPinRequest with attempt")
+            print("UI: onPinRequest with attempt")
             
             showPinRequest(enterPin, message: "Pin attempts remaining \(attempt)")
             
@@ -292,16 +302,16 @@ class ViewController: UIViewController, WKNavigationDelegate, UITextViewDelegate
         
         
         func requestCardInsertion() {
-            print("requestCardInsertion without handler ")
+            print("UI: requestCardInsertion without handler ")
         }
         func requestCardInsertion(_ msgHandler: (NSObjectProtocol & NFCOverlayMessageHandlerProtocol)!) {
             self.msgHandler = msgHandler
             msgHandler.setText("Please provide the card now")
-            print("requestCardInsertion with handler ")
+            print("UI: UI: requestCardInsertion with handler ")
         }
         
         func onPinCanRequest(_ enterPinCan: (NSObjectProtocol & ConfirmPinCanOperationProtocol)!) {
-            print("onPinCanRequest")
+            print("UI: UI: onPinCanRequest")
             DispatchQueue.main.async{
 
                 let alert = UIAlertController(title: "Enter pin/can", message: "", preferredStyle: .alert)
@@ -317,12 +327,12 @@ class ViewController: UIViewController, WKNavigationDelegate, UITextViewDelegate
                 }
 
                 let cancelAction = UIAlertAction(title: "Cancel", style: .destructive, handler: {[weak alert] (_) in 
-                    print("cancelling")
+                    print("UI: UI: cancelling")
                     self.ctxComp.cancelActivation()
                 })
                 let acceptAction = UIAlertAction(title: "Enter", style: .default, handler: { [weak alert] (_) in
                     guard let pin = alert?.textFields?[0], let can = alert?.textFields?[1] else {
-                        print("Issue with Alert TextFields")
+                        print("UI: UI: Issue with Alert TextFields")
                         return
                     }
 
@@ -340,7 +350,7 @@ class ViewController: UIViewController, WKNavigationDelegate, UITextViewDelegate
         }
 
         func onCanRequest(_ enterCan: (NSObjectProtocol & ConfirmPasswordOperationProtocol)!) {
-            print("onCanRequest")
+            print("UI: UI: onCanRequest")
             DispatchQueue.main.async{
 
                 let alert = UIAlertController(title: "Enter can", message: "", preferredStyle: .alert)
@@ -351,13 +361,13 @@ class ViewController: UIViewController, WKNavigationDelegate, UITextViewDelegate
                 }
 
                 let cancelAction = UIAlertAction(title: "Cancel", style: .destructive, handler: {[weak alert] (_) in 
-                    print("cancelling")
+                    print("UI: UI: cancelling")
                     self.ctxComp.cancelActivation()
                 })
 
                 let acceptAction = UIAlertAction(title: "Enter", style: .default, handler: { [weak alert] (_) in
                     guard let can = alert?.textFields?[0] else {
-                        print("Issue with Alert TextFields")
+                        print("UI: UI: Issue with Alert TextFields")
                         return
                     }
                    
@@ -372,9 +382,7 @@ class ViewController: UIViewController, WKNavigationDelegate, UITextViewDelegate
         }
         
         func onServerData(_ data: (NSObjectProtocol & ServerDataProtocol)!, withTransactionData transactionData: String!, withSelectReadWrite selectReadWrite: (NSObjectProtocol & ConfirmAttributeSelectionOperationProtocol)!) {
-            print("onServerData")
-            
-            frm.setDebugLogLevel()
+            print("UI: UI: onServerData")
             
             let duBytes = data.getTermsOfUsage()?.getDataBytes()  ?? Data.init()
             print(NSString.init(data: duBytes, encoding: String.Encoding.utf8.rawValue))
@@ -420,43 +428,43 @@ class ViewController: UIViewController, WKNavigationDelegate, UITextViewDelegate
         
         func onCardAuthenticationSuccessful() {
             self.msgHandler?.setText("Authentication to card successful")
-            print("onCardAuthenticationSuccessful")
+            print("UI: UI: onCardAuthenticationSuccessful")
         }
         
         func onCardRecognized() {
             self.msgHandler?.setText("Card was detected")
-            print("on card recognized")
+            print("UI: UI: onCardRecognized")
         }
       
         func onCardBlocked() {
-            print("onCardBlocked")
+            print("UI: UI: onCardBlocked")
         }
         
         func onCardDeactivated() {
-            print("onCardDeactivated")
+            print("UI: UI: onCardDeactivated")
         }
         
         func onCardInteractionComplete() {
             self.msgHandler?.setText("Card can soon be removed")
-            print("onCardInteractionComplete")
+            print("UI: UI: onCardInteractionComplete2")
         }
         
         func onCardRemoved() {
-            print("onCardRemoved");
+            print("UI: UI: onCardRemoved");
         }
         
         func onStarted() {
-            print("onStarted")
+            print("UI: UI: onStarted")
         }
         
         func onAuthenticationCompletion(_ result: (NSObjectProtocol & ActivationResultProtocol)!) {
-            print("onAuthenticationCompletion", result);        
+            print("UI: UI: onAuthenticationCompletion", result);
 
             DispatchQueue.main.async{
                 if let urlString = result.getRedirectUrl() {
                 
                 let url = URL(string: urlString)!
-                print("requesting url: \(urlString)")
+                print("UI: requesting url: \(urlString)")
                 var request = URLRequest(url: url)
                     self.v.webView.load(request)
                     self.v.webView.isHidden = false 
@@ -464,7 +472,7 @@ class ViewController: UIViewController, WKNavigationDelegate, UITextViewDelegate
                     DispatchQueue.main.async{
                         let alert = UIAlertController(title: "Process end", message: "Process ended without redirect Message: \(result.getErrorMessage())", preferredStyle: .alert)
                         let cancelAction = UIAlertAction(title: "Cancel", style: .destructive, handler: {[weak alert] (_) in 
-                            print("cancelling")
+                            print("UI: cancelling")
                         })
                         alert.addAction(cancelAction)
                         self.v.present(alert, animated: true, completion: nil)
@@ -474,6 +482,18 @@ class ViewController: UIViewController, WKNavigationDelegate, UITextViewDelegate
         }
     }
    
+    class ContextStop: NSObject, StopServiceHandlerProtocol {
+        func onSuccess() {
+            print("UI: StartServiceHandlerProtocol:onSuccess")
+        }
+        
+        func onFailure(_ response: (NSObjectProtocol & ServiceErrorResponseProtocol)!) {
+            print("UI: StartServiceHandlerProtocol:onFailure")
+        }
+        
+        
+    }
+    
     class ContextCompletion: NSObject, StartServiceHandlerProtocol {
         var frm : OpenEcardProtocol? = nil;
         var eacFactory : EacControllerFactoryProtocol? = nil;
@@ -481,6 +501,8 @@ class ViewController: UIViewController, WKNavigationDelegate, UITextViewDelegate
         var currentEacActivation: EacControllerStart? = nil;
         var currentPinMgmtActivation: PinMgmtControllerStart? = nil;
         var currentController: ActivationControllerProtocol? = nil;
+        var source: ActivationSourceProtocol? = nil;
+        var context: ContextManagerProtocol? = nil;
         var v: ViewController?
         var ready = false
       
@@ -488,15 +510,20 @@ class ViewController: UIViewController, WKNavigationDelegate, UITextViewDelegate
             self.frm = frm;
         }
      
+        func setConetxt(context: ContextManagerProtocol){
+            self.context = context;
+        }
+        
         func setViewCtrl(v:ViewController){
             self.v = v
         }
         
         func onSuccess(_ source: (NSObjectProtocol & ActivationSourceProtocol)!) {
-            print("Context process completed successfully.")
+            print("UI: Context process completed successfully.")
             
             self.eacFactory = source.eacFactory();
             self.pinMgmtFactory = source.pinManagementFactory();
+            self.source = source
 
             self.currentEacActivation = EacControllerStart(frm: frm!, v:v!, ctx:self);
             self.currentPinMgmtActivation = PinMgmtControllerStart(frm: frm!, v:v!, ctx: self);
@@ -522,7 +549,7 @@ class ViewController: UIViewController, WKNavigationDelegate, UITextViewDelegate
         }
          
         func onFailure(_ response: (NSObjectProtocol & ServiceErrorResponseProtocol)!) {
-            print("Context process completed successfully.")
+            print("UI: Context process completed successfully.")
             self.ready = false 
         }
     }
@@ -557,10 +584,12 @@ class ViewController: UIViewController, WKNavigationDelegate, UITextViewDelegate
     }
     
     func ini(){
-        print("Creating the context");
-        var context = frm?.context("Please provide card", withDefaultNFCCardRecognizedMessage: "Found card")
-        context?.start(ctxCompletion)
+        print("UI: Creating the context");
+        let context = frm?.context(IOSNFCOptions())
+        context!.start(ctxCompletion)
         ctxCompletion.setFrm(frm: frm!)
+        ctxCompletion.setConetxt(context: context!)
+        // frm?.developerOptions()?.setDebugLogLevel()
         ctxCompletion.setViewCtrl(v:self)
     }
     
@@ -571,7 +600,7 @@ class ViewController: UIViewController, WKNavigationDelegate, UITextViewDelegate
     
     lazy var frm = createOpenEcard()
     var ctxCompletion = ContextCompletion()
-
+    
     @IBAction func eacDirectURL(_ sender: Any) {
         let urlstart = "http://localhost/eID-Client?tcTokenURL="
         ctxCompletion.performEAC(url: urlstart + frm!.prepareTCTokenURL(tf_directEACURL.text))
