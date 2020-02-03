@@ -85,7 +85,7 @@ class ViewController: UIViewController, WKNavigationDelegate, UITextViewDelegate
                     }
                     
                     if(npin.text == cnpin.text){
-                        enterOldNewPins.enter(pin.text, withNewPassword: npin.text)
+                        enterOldNewPins.confirmPassword(pin.text, withNewPassword: npin.text)
                     }else{
                         print("UI: new pin and confirmation not equal")
                     }
@@ -147,7 +147,7 @@ class ViewController: UIViewController, WKNavigationDelegate, UITextViewDelegate
                     }
 
                     if(newPin.text == cnpin.text){
-                        enterPinCanNewPin.enter(pin.text, withCan: can.text, withNewPin: newPin.text)
+                        enterPinCanNewPin.confirmChangePassword(pin.text, withCan: can.text, withNewPin: newPin.text)
                     }else{
                         print("UI: new pin and confirmation not equal")
                     }
@@ -183,7 +183,7 @@ class ViewController: UIViewController, WKNavigationDelegate, UITextViewDelegate
                         return
                     }
 
-                    unblockWithPuk.enter(puk.text)
+                    unblockWithPuk.confirmPassword(puk.text)
 
                 })
 
@@ -276,7 +276,7 @@ class ViewController: UIViewController, WKNavigationDelegate, UITextViewDelegate
                         return
                     }
                     
-                    enterPin!.enter(pin.text)
+                    enterPin!.confirmPassword(pin.text)
                     
                 })
                 
@@ -336,7 +336,7 @@ class ViewController: UIViewController, WKNavigationDelegate, UITextViewDelegate
                         return
                     }
 
-                    enterPinCan.enter(pin.text , withCan: can.text)
+                    enterPinCan.confirmPassword(pin.text , withCan: can.text)
                     
 
                 })
@@ -371,7 +371,7 @@ class ViewController: UIViewController, WKNavigationDelegate, UITextViewDelegate
                         return
                     }
                    
-                    enterCan.enter(can.text)
+                    enterCan.confirmPassword(can.text)
                 })
 
                 alert.addAction(acceptAction)
@@ -417,7 +417,7 @@ class ViewController: UIViewController, WKNavigationDelegate, UITextViewDelegate
                             idx += 1;
                         }
 
-                    selectReadWrite.enter(data.getReadAccessAttributes(), withWrite: nil)
+                    selectReadWrite.enterAttributeSelection(data.getReadAccessAttributes(), withWrite: nil)
  
                 }))
 
@@ -533,7 +533,7 @@ class ViewController: UIViewController, WKNavigationDelegate, UITextViewDelegate
         }
 
         func cancelActivation(){
-            self.currentController?.cancelAuthentication()
+            self.currentController?.cancelOngoingAuthentication()
         }
 
         func performEAC(url: String){
@@ -586,7 +586,7 @@ class ViewController: UIViewController, WKNavigationDelegate, UITextViewDelegate
     func ini(){
         print("UI: Creating the context");
         let context = frm?.context(IOSNFCOptions())
-        context!.start(ctxCompletion)
+        context!.initializeContext(ctxCompletion)
         ctxCompletion.setFrm(frm: frm!)
         ctxCompletion.setConetxt(context: context!)
         // frm?.developerOptions()?.setDebugLogLevel()
