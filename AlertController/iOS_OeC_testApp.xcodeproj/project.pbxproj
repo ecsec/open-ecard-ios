@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		2E88059F2439FC8800628D8F /* WebKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 2E88059E2439FC8800628D8F /* WebKit.framework */; };
 		2EA0F62F237A28BC00B63BA3 /* OpenEcard.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 2EA0F62D237A289700B63BA3 /* OpenEcard.framework */; };
 		2EA0F630237A28BC00B63BA3 /* OpenEcard.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 2EA0F62D237A289700B63BA3 /* OpenEcard.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		2ED1F19D23224C5F0054B632 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 6C702FD220D7DA0E000083E1 /* Main.storyboard */; };
@@ -30,6 +31,7 @@
 /* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
+		2E88059E2439FC8800628D8F /* WebKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = WebKit.framework; path = System/Library/Frameworks/WebKit.framework; sourceTree = SDKROOT; };
 		2EA0F62D237A289700B63BA3 /* OpenEcard.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = OpenEcard.framework; path = "../../open-ecard/packager/ios-framework/target/robovm/OpenEcard.framework"; sourceTree = "<group>"; };
 		2ED1F19F23224C600054B632 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/Main.strings; sourceTree = "<group>"; };
 		2ED1F1A5232251A00054B632 /* AlertController.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = AlertController.entitlements; sourceTree = "<group>"; };
@@ -46,6 +48,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				2E88059F2439FC8800628D8F /* WebKit.framework in Frameworks */,
 				2EA0F62F237A28BC00B63BA3 /* OpenEcard.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -53,12 +56,21 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		2E88059D2439FC8800628D8F /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				2E88059E2439FC8800628D8F /* WebKit.framework */,
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
 		6C702FC220D7DA0E000083E1 = {
 			isa = PBXGroup;
 			children = (
 				2EA0F62D237A289700B63BA3 /* OpenEcard.framework */,
 				6C702FCD20D7DA0E000083E1 /* AlertController */,
 				6C702FCC20D7DA0E000083E1 /* Products */,
+				2E88059D2439FC8800628D8F /* Frameworks */,
 			);
 			sourceTree = "<group>";
 		};
