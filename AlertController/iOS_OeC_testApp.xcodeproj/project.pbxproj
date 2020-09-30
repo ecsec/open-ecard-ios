@@ -8,12 +8,11 @@
 
 /* Begin PBXBuildFile section */
 		2E88059F2439FC8800628D8F /* WebKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 2E88059E2439FC8800628D8F /* WebKit.framework */; };
-		2EA0F62F237A28BC00B63BA3 /* OpenEcard.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 2EA0F62D237A289700B63BA3 /* OpenEcard.framework */; };
-		2EA0F630237A28BC00B63BA3 /* OpenEcard.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 2EA0F62D237A289700B63BA3 /* OpenEcard.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		2ED1F19D23224C5F0054B632 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 6C702FD220D7DA0E000083E1 /* Main.storyboard */; };
 		6C702FCF20D7DA0E000083E1 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6C702FCE20D7DA0E000083E1 /* AppDelegate.swift */; };
 		6C702FD120D7DA0E000083E1 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6C702FD020D7DA0E000083E1 /* ViewController.swift */; };
 		6C702FD620D7DA0E000083E1 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 6C702FD520D7DA0E000083E1 /* Assets.xcassets */; };
+		D54CA851874DF88450068CA5 /* Pods_iOS_OeC_testApp.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D98A554B289D69D83F0D7A66 /* Pods_iOS_OeC_testApp.framework */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXCopyFilesBuildPhase section */
@@ -23,7 +22,6 @@
 			dstPath = "";
 			dstSubfolderSpec = 10;
 			files = (
-				2EA0F630237A28BC00B63BA3 /* OpenEcard.framework in Embed Frameworks */,
 			);
 			name = "Embed Frameworks";
 			runOnlyForDeploymentPostprocessing = 0;
@@ -31,8 +29,8 @@
 /* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
+		28D2581C02C24076C077020F /* Pods-iOS_OeC_testApp.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-iOS_OeC_testApp.debug.xcconfig"; path = "Target Support Files/Pods-iOS_OeC_testApp/Pods-iOS_OeC_testApp.debug.xcconfig"; sourceTree = "<group>"; };
 		2E88059E2439FC8800628D8F /* WebKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = WebKit.framework; path = System/Library/Frameworks/WebKit.framework; sourceTree = SDKROOT; };
-		2EA0F62D237A289700B63BA3 /* OpenEcard.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = OpenEcard.framework; path = "../../open-ecard/packager/ios-framework/target/robovm/OpenEcard.framework"; sourceTree = "<group>"; };
 		2ED1F19F23224C600054B632 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/Main.strings; sourceTree = "<group>"; };
 		2ED1F1A5232251A00054B632 /* AlertController.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = AlertController.entitlements; sourceTree = "<group>"; };
 		6C702FCB20D7DA0E000083E1 /* iOS_OeC_testApp.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = iOS_OeC_testApp.app; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -41,6 +39,8 @@
 		6C702FD320D7DA0E000083E1 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		6C702FD520D7DA0E000083E1 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		6C702FDA20D7DA0E000083E1 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		D2A8520CE8B379B336B34871 /* Pods-iOS_OeC_testApp.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-iOS_OeC_testApp.release.xcconfig"; path = "Target Support Files/Pods-iOS_OeC_testApp/Pods-iOS_OeC_testApp.release.xcconfig"; sourceTree = "<group>"; };
+		D98A554B289D69D83F0D7A66 /* Pods_iOS_OeC_testApp.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_iOS_OeC_testApp.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -49,7 +49,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				2E88059F2439FC8800628D8F /* WebKit.framework in Frameworks */,
-				2EA0F62F237A28BC00B63BA3 /* OpenEcard.framework in Frameworks */,
+				D54CA851874DF88450068CA5 /* Pods_iOS_OeC_testApp.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -60,6 +60,7 @@
 			isa = PBXGroup;
 			children = (
 				2E88059E2439FC8800628D8F /* WebKit.framework */,
+				D98A554B289D69D83F0D7A66 /* Pods_iOS_OeC_testApp.framework */,
 			);
 			name = Frameworks;
 			sourceTree = "<group>";
@@ -67,10 +68,10 @@
 		6C702FC220D7DA0E000083E1 = {
 			isa = PBXGroup;
 			children = (
-				2EA0F62D237A289700B63BA3 /* OpenEcard.framework */,
 				6C702FCD20D7DA0E000083E1 /* AlertController */,
 				6C702FCC20D7DA0E000083E1 /* Products */,
 				2E88059D2439FC8800628D8F /* Frameworks */,
+				891A45B53830B1BBD9D5C469 /* Pods */,
 			);
 			sourceTree = "<group>";
 		};
@@ -95,6 +96,15 @@
 			path = AlertController;
 			sourceTree = "<group>";
 		};
+		891A45B53830B1BBD9D5C469 /* Pods */ = {
+			isa = PBXGroup;
+			children = (
+				28D2581C02C24076C077020F /* Pods-iOS_OeC_testApp.debug.xcconfig */,
+				D2A8520CE8B379B336B34871 /* Pods-iOS_OeC_testApp.release.xcconfig */,
+			);
+			path = Pods;
+			sourceTree = "<group>";
+		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
@@ -102,10 +112,12 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = 6C702FDD20D7DA0E000083E1 /* Build configuration list for PBXNativeTarget "iOS_OeC_testApp" */;
 			buildPhases = (
+				43F85A4A9789A5627F3EA140 /* [CP] Check Pods Manifest.lock */,
 				6C702FC720D7DA0E000083E1 /* Sources */,
 				6C702FC820D7DA0E000083E1 /* Frameworks */,
 				6C702FC920D7DA0E000083E1 /* Resources */,
 				2ED1F1A4232251660054B632 /* Embed Frameworks */,
+				5067F08B3F66CE0D32764B3D /* [CP] Embed Pods Frameworks */,
 			);
 			buildRules = (
 			);
@@ -161,6 +173,49 @@
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXResourcesBuildPhase section */
+
+/* Begin PBXShellScriptBuildPhase section */
+		43F85A4A9789A5627F3EA140 /* [CP] Check Pods Manifest.lock */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+			);
+			inputPaths = (
+				"${PODS_PODFILE_DIR_PATH}/Podfile.lock",
+				"${PODS_ROOT}/Manifest.lock",
+			);
+			name = "[CP] Check Pods Manifest.lock";
+			outputFileListPaths = (
+			);
+			outputPaths = (
+				"$(DERIVED_FILE_DIR)/Pods-iOS_OeC_testApp-checkManifestLockResult.txt",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
+			showEnvVarsInLog = 0;
+		};
+		5067F08B3F66CE0D32764B3D /* [CP] Embed Pods Frameworks */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+				"${PODS_ROOT}/Target Support Files/Pods-iOS_OeC_testApp/Pods-iOS_OeC_testApp-frameworks.sh",
+				"${PODS_ROOT}/open-ecard/OpenEcard.framework",
+			);
+			name = "[CP] Embed Pods Frameworks";
+			outputPaths = (
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/OpenEcard.framework",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-iOS_OeC_testApp/Pods-iOS_OeC_testApp-frameworks.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+/* End PBXShellScriptBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
 		6C702FC720D7DA0E000083E1 /* Sources */ = {
@@ -229,9 +284,7 @@
 				ENABLE_BITCODE = NO;
 				ENABLE_STRICT_OBJC_MSGSEND = YES;
 				ENABLE_TESTABILITY = YES;
-				FRAMEWORK_SEARCH_PATHS = (
-					"/Users/ecsec/open-ecard/packager/ios-framework/target/robovm\n/Users/ecsec/open-ecard/packager/ios-framework/target/robovm\n/Users/ecsec/open-ecard/packager/ios-framework/target/robovm\n/Users/ecsec/open-ecard/packager/ios-framework/target/robovm\n/**",
-				);
+				FRAMEWORK_SEARCH_PATHS = "/Users/ecsec/open-ecard/packager/ios-framework/target/robovm\n/Users/ecsec/open-ecard/packager/ios-framework/target/robovm\n/Users/ecsec/open-ecard/packager/ios-framework/target/robovm\n/Users/ecsec/open-ecard/packager/ios-framework/target/robovm\n/**";
 				GCC_C_LANGUAGE_STANDARD = gnu11;
 				GCC_DYNAMIC_NO_PIC = NO;
 				GCC_NO_COMMON_BLOCKS = YES;
@@ -297,9 +350,7 @@
 				ENABLE_BITCODE = NO;
 				ENABLE_NS_ASSERTIONS = NO;
 				ENABLE_STRICT_OBJC_MSGSEND = YES;
-				FRAMEWORK_SEARCH_PATHS = (
-					"/Users/ecsec/open-ecard/packager/ios-framework/target/robovm\n/Users/ecsec/open-ecard/packager/ios-framework/target/robovm\n/Users/ecsec/open-ecard/packager/ios-framework/target/robovm\n/Users/ecsec/open-ecard/packager/ios-framework/target/robovm\n/**",
-				);
+				FRAMEWORK_SEARCH_PATHS = "/Users/ecsec/open-ecard/packager/ios-framework/target/robovm\n/Users/ecsec/open-ecard/packager/ios-framework/target/robovm\n/Users/ecsec/open-ecard/packager/ios-framework/target/robovm\n/Users/ecsec/open-ecard/packager/ios-framework/target/robovm\n/**";
 				GCC_C_LANGUAGE_STANDARD = gnu11;
 				GCC_NO_COMMON_BLOCKS = YES;
 				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
@@ -318,6 +369,7 @@
 		};
 		6C702FDE20D7DA0E000083E1 /* Debug */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 28D2581C02C24076C077020F /* Pods-iOS_OeC_testApp.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_ENTITLEMENTS = AlertController/AlertController.entitlements;
@@ -343,6 +395,7 @@
 		};
 		6C702FDF20D7DA0E000083E1 /* Release */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = D2A8520CE8B379B336B34871 /* Pods-iOS_OeC_testApp.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_ENTITLEMENTS = AlertController/AlertController.entitlements;

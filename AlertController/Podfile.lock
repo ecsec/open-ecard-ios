@@ -1,0 +1,16 @@
+PODS:
+  - open-ecard (2.1.1-rc.1)
+
+DEPENDENCIES:
+  - open-ecard (~> 2.1.1-rc.1)
+
+SPEC REPOS:
+  trunk:
+    - open-ecard
+
+SPEC CHECKSUMS:
+  open-ecard: 51b409efc5567b803a25028003de727bbc5b015d
+
+PODFILE CHECKSUM: d20545c84a7b54aa6786cded3322a9a9ca163680
+
+COCOAPODS: 1.9.1
