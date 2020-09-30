@@ -587,6 +587,8 @@ class ViewController: UIViewController, WKNavigationDelegate, UITextViewDelegate
         print("UI: Creating the context");
         let context = frm?.context(IOSNFCOptions())
         context!.initializeContext(ctxCompletion)
+        frm?.developerOptions()?.setDebugLogLevel()
+        frm?.setDebugLogLevel()
         ctxCompletion.setFrm(frm: frm!)
         ctxCompletion.setConetxt(context: context!)
         // frm?.developerOptions()?.setDebugLogLevel()
