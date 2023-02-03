@@ -4,7 +4,7 @@ import OpenEcard
 import WebKit
 import OpenEcard.open_ecard_mobile_lib
 
-class ViewController: UIViewController, WKNavigationDelegate, UITextViewDelegate {
+class ViewController: UIViewController, WKNavigationDelegate, UITextViewDelegate, URLSessionTaskDelegate {
     
     class IOSNFCOptions: NSObject, NFCConfigProtocol {
         func getProvideCardMessage() -> String! {
@@ -561,7 +561,7 @@ class ViewController: UIViewController, WKNavigationDelegate, UITextViewDelegate
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        tf_directEACURL.text = "https://test.governikus-eid.de:443/Autent-DemoApplication/RequestServlet;?provider=demo_epa_20&redirect=true";
+        tf_directEACURL.text = "https://test.governikus-eid.de/Autent-DemoApplication/samlstationary";
         tf_testServerURL.text = "https://eid.mtg.de/eid-server-demo-app/index.html";
         
         self.webView.navigationDelegate = self
@@ -604,10 +604,51 @@ class ViewController: UIViewController, WKNavigationDelegate, UITextViewDelegate
     var ctxCompletion = ContextCompletion()
     
     @IBAction func eacDirectURL(_ sender: Any) {
-        let urlstart = "http://localhost/eID-Client?tcTokenURL="
-        ctxCompletion.performEAC(url: urlstart + frm!.prepareTCTokenURL(tf_directEACURL.text))
+        getTCTokenURL(url: tf_directEACURL.text) { tctokenurl in
+            self.ctxCompletion.performEAC(url: tctokenurl)
+        }
     }
     
+    private func getTCTokenURL(url: String, hdlr: @escaping (String) -> Void) {
+
+        let url = URL(string: url)!
+        var request = URLRequest(url: url)
+
+        request.httpMethod = "POST"
+        request.httpBody =   "changeAllNatural=ALLOWED&requestedAttributesEidForm.documentType=ALLOWED&requestedAttributesEidForm.issuingState=ALLOWED&requestedAttributesEidForm.dateOfExpiry=ALLOWED&requestedAttributesEidForm.givenNames=ALLOWED&requestedAttributesEidForm.familyNames=ALLOWED&requestedAttributesEidForm.artisticName=ALLOWED&requestedAttributesEidForm.academicTitle=ALLOWED&requestedAttributesEidForm.dateOfBirth=ALLOWED&requestedAttributesEidForm.placeOfBirth=ALLOWED&requestedAttributesEidForm.nationality=ALLOWED&requestedAttributesEidForm.birthName=ALLOWED&requestedAttributesEidForm.placeOfResidence=ALLOWED&requestedAttributesEidForm.communityID=ALLOWED&requestedAttributesEidForm.residencePermitI=ALLOWED&requestedAttributesEidForm.restrictedId=ALLOWED&ageVerificationForm.ageToVerify=0&ageVerificationForm.ageVerification=PROHIBITED&placeVerificationForm.placeToVerify=02760401100000&placeVerificationForm.placeVerification=PROHIBITED&eidTypesForm.cardCertified=ALLOWED&eidTypesForm.seCertified=ALLOWED&eidTypesForm.seEndorsed=ALLOWED&eidTypesForm.hwKeyStore=ALLOWED&transactionInfo=&levelOfAssurance=BUND_HOCH".data(using: .utf8)
+
+        let session = URLSession(configuration: URLSessionConfiguration.default, delegate: self, delegateQueue: nil)
+        let task = session.dataTask(with: request) {data,response,error in
+            if let error = error {
+                print("error: ")
+                print(error)
+            } else if let response = response as? HTTPURLResponse {
+                print("response: ")
+                print(response)
+                if(response.statusCode == 302){
+                    hdlr(response.value(forHTTPHeaderField: "Location") ?? "error")
+                } else {
+                    print("error")
+                }
+            } else {
+                print("error")
+            }
+        }
+
+        task.resume()
+    }
+
+   //stop redirect
+    func urlSession(
+        _ session: URLSession,
+        task: URLSessionTask,
+        willPerformHTTPRedirection response: HTTPURLResponse,
+        newRequest request: URLRequest,
+        completionHandler: (URLRequest?) -> Void) {
+            print(request)
+            completionHandler(nil)
+        }
+
     @IBAction func eacWithServer(_ sender: Any) {
         guard let url = URL(string: tf_testServerURL.text) else { return }
         let req = URLRequest(url: url)
