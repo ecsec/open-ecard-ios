@@ -204,7 +204,7 @@
 			);
 			inputPaths = (
 				"${PODS_ROOT}/Target Support Files/Pods-iOS_OeC_testApp/Pods-iOS_OeC_testApp-frameworks.sh",
-				"${PODS_ROOT}/open-ecard/OpenEcard.framework",
+				"${PODS_XCFRAMEWORKS_BUILD_DIR}/open-ecard/OpenEcard.framework/OpenEcard",
 			);
 			name = "[CP] Embed Pods Frameworks";
 			outputPaths = (

@@ -6,6 +6,6 @@ target 'iOS_OeC_testApp' do
   use_frameworks!
 
   # Pods for iOS_OeC_testApp
-  pod 'open-ecard', '>= 2.1.1'
+  pod 'open-ecard', '>= 2.1.6'
 
 end
