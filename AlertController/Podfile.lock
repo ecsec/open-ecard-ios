@@ -1,16 +1,16 @@
 PODS:
-  - open-ecard (2.1.6)
+  - open-ecard (2.3.0-rc.6)
 
 DEPENDENCIES:
-  - open-ecard (>= 2.1.6)
+  - open-ecard (>= 2.3.0-rc.6)
 
 SPEC REPOS:
   trunk:
     - open-ecard
 
 SPEC CHECKSUMS:
-  open-ecard: 80ae1df1c1f6b0b65e4316d7565b22888b4cd6b7
+  open-ecard: 5893f02daf8b32fc549c5578e527979bfe80ef6b
 
-PODFILE CHECKSUM: 9f684fbc507ea5ef3ccf6e04548a7e04b1bad124
+PODFILE CHECKSUM: 84531ecf0057ac85d90d9568191057de449a6d71
 
-COCOAPODS: 1.11.3
+COCOAPODS: 1.15.2
